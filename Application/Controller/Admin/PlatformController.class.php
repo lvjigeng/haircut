@@ -1,29 +1,38 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: www29
- * Date: 2018/2/9
- * Time: 15:29
+ * 平台统一控制器,验证是否登录
  */
 class PlatformController extends Controller
 {
+    /**
+     * 初始化
+     */
     public function __construct()
     {
-        if (!isset($_SESSION['authorinfo'])) {
-            if (isset($_COOKIE['id']) && isset($_COOKIE['password'])) {
+        //验证session中的登录信息
+        @session_start();
+        if(!isset($_SESSION['userinfo'])){//验证cookie中没有登录信息,跳转到等页面
+            //检测cookie中是否有id和password
+            if(isset($_COOKIE['id']) && isset($_COOKIE['password'])){
+                //有id和password 就取出来
                 $id = $_COOKIE['id'];
                 $password = $_COOKIE['password'];
-                $authorModel = new authorModel();
-                $authorinfo = $authorModel->getCookieCheck($id, $password);
-                if ($authorinfo === false) {
-                    self::redirect('index.php?p=Home&c=Login&a=index', '非法登录', 2);
+                //验证对不对
+                $usersModel = new UsersModel();
+                //成功返回用户信息 失败返回false
+                $result = $usersModel->checkIdPwd($id,$password);
+                if($result===false){//验证失败
+                    //跳转登录功能
+                    self::redirect("index.php?p=Admin&c=Login&a=Login","请登录",2);
+                }else{
+                    //保存用户信息到session中
+                    $_SESSION['userinfo'] = $result;
+                    return;
                 }
-                return null;
             }
-            self::redirect('index.php?p=Home&c=Login&a=index', '请先登录', 2);
+            //跳转登录功能
+            self::redirect("index.php?p=Admin&c=Login&a=Login","请登录",2);
         }
-        //有session就跳转到首页
-        self::redirect('index.php?p=Home&c=Index&a=index');
     }
 }
