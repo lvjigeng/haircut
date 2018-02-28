@@ -47,23 +47,7 @@
             <i class="icon-user fa-fw"></i>
           </a>
         </div>
-        <!-- / buttons -->
 
-        <!-- link and dropdown -->
-        <!-- / link and dropdown -->
-
-        <!-- search form -->
-        <!--<form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo" data-target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">-->
-          <!--<div class="form-group">-->
-            <!--<div class="input-group">-->
-              <!--<input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control input-sm bg-light no-border rounded padder" placeholder="Search projects...">-->
-              <!--<span class="input-group-btn">-->
-                <!--<button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>-->
-              <!--</span>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</form>-->
-        <!-- / search form -->
 
         <!-- nabar right -->
         <ul class="nav navbar-nav navbar-right" style="margin-top: 10px; margin-right: 5px">
@@ -200,13 +184,11 @@
                   <span class="font-bold" translate="aside.nav.DASHBOARD">店铺管理</span>
                 </a>
                 <ul class="nav nav-sub dk">
-
                   <li ui-sref-active="active">
                     <a href="index.php?p=Admin&c=Members&a=add">
                       <span>新增员工</span>
                     </a>
                   </li>
-
                   <li ui-sref-active="active">
                     <a href="index.php?p=Admin&c=Members&a=membersList">
                       <span>员工管理</span>
@@ -256,8 +238,87 @@
       <a href class="off-screen-toggle hide" data-toggle="class:off-screen" data-target=".app-aside" ></a>
       <div class="app-content-body fade-in-up">
         <!-- COPY the content from "tpl/" -->
-        <!-----------------首页主要内容------------------------------------>
+        <!-----------------员工添加------------------------------------>
+        <div class="note">
+          <h4>修改员工</h4>
+          <form action="index.php?p=Admin&c=Members&a=edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="member_id" value="<?=$member['member_id']?>">
+            <input type="hidden" name="thumb_photo" value="<?=$member['photo']?>">
+            <table class="news_form">
+              <tr>
+                <td>用户名：</td>
+                <td><input type="text" name="username" class="inbox" value="<?=$member['username']?>" required/></td>
+              </tr>
+              <tr>
+                <td>原密码：</td>
+                <td><input type="password" name="oldpassword" class="inbox"/></td>
+              </tr>
 
+              <tr>
+                <td>新密码：</td>
+                <td><input type="password" name="password" class="inbox"/></td>
+              </tr>
+              <tr>
+                <td>确认密码：</td>
+                <td><input type="password" name="repassword" class="inbox"/></td>
+              </tr>
+
+              <tr>
+                <td>姓名：</td>
+                <td><input type="text" name="realname" class="inbox" value="<?=$member['realname']?>" required/></td>
+              </tr>
+
+              <tr>
+                <td>性别：</td>
+                <td>
+                  女：<input type="radio" name="sex"  value="0" <?=$member['sex']==0?'checked':''?>/>
+                  男：<input type="radio" name="sex"  value="1" <?=$member['sex']==1?'checked':''?> />
+                </td>
+              </tr>
+
+              <tr>
+                <td>电话：</td>
+                <td><input type="number" name="telephone" class="inbox" value="<?=$member['telephone']?>" required/></td>
+              </tr>
+
+              <tr>
+                <td>是否管理员：</td>
+                <td>
+                  否：<input type="radio" name="is_admin"  value="0" <?=$member['is_admin']==0?'checked':''?>/>
+                  是：<input type="radio" name="is_admin"  value="1" <?=$member['is_admin']==1?'checked':''?>/>
+                </td>
+              </tr>
+
+              <tr>
+                <td>部门：</td>
+                <td>
+                  <select name="group_id" >
+                    <?php foreach($groups as $group):?>
+                    <option value="<?=$group['group_id']?>" <?=$member['group_id']==$group['group_id']?'selected':''?>><?=$group['name']?></option>
+                    <?php endforeach;?>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>头像</td>
+                <td><img src="<?=$member['photo']?>" alt=""></td>
+              </tr>
+              <tr>
+                <td>修改头像：</td>
+                <td>
+                  <input type="file" name="photo" />
+
+                </td>
+              </tr>
+
+
+              <tr>
+                <td></td>
+                <td><input type="submit" value="提交"/></td>
+              </tr>
+            </table>
+          </form>
+        </div>
         <!-- PASTE above -->
       </div>
     </div>

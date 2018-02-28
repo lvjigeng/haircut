@@ -200,13 +200,11 @@
                   <span class="font-bold" translate="aside.nav.DASHBOARD">店铺管理</span>
                 </a>
                 <ul class="nav nav-sub dk">
-
                   <li ui-sref-active="active">
                     <a href="index.php?p=Admin&c=Members&a=add">
                       <span>新增员工</span>
                     </a>
                   </li>
-
                   <li ui-sref-active="active">
                     <a href="index.php?p=Admin&c=Members&a=membersList">
                       <span>员工管理</span>
@@ -256,8 +254,76 @@
       <a href class="off-screen-toggle hide" data-toggle="class:off-screen" data-target=".app-aside" ></a>
       <div class="app-content-body fade-in-up">
         <!-- COPY the content from "tpl/" -->
-        <!-----------------首页主要内容------------------------------------>
+        <!-----------------员工添加------------------------------------>
+        <div class="note">
+          <h4>添加员工</h4>
+          <form action="index.php?p=Admin&c=Members&a=add" method="post" enctype="multipart/form-data">
+            <table class="news_form">
+              <tr>
+                <td>用户名：</td>
+                <td><input type="text" name="username" class="inbox" required/></td>
+              </tr>
+              <tr>
+                <td>密码：</td>
+                <td><input type="password" name="password" class="inbox" required/></td>
+              </tr>
+              <tr>
+                <td>确认密码：</td>
+                <td><input type="password" name="repassword" class="inbox" required/></td>
+              </tr>
 
+              <tr>
+                <td>姓名：</td>
+                <td><input type="text" name="realname" class="inbox" required/></td>
+              </tr>
+
+              <tr>
+                <td>性别：</td>
+                <td>
+                  女：<input type="radio" name="sex"  value="0" checked/>
+                  男：<input type="radio" name="sex"  value="1" />
+                </td>
+              </tr>
+
+              <tr>
+                <td>电话：</td>
+                <td><input type="number" name="telephone" class="inbox" required/></td>
+              </tr>
+
+              <tr>
+                <td>是否管理员：</td>
+                <td>
+                  否：<input type="radio" name="is_admin"  value="0" checked/>
+                  是：<input type="radio" name="is_admin"  value="1" />
+                </td>
+              </tr>
+
+              <tr>
+                <td>部门：</td>
+                <td>
+                  <select name="group_id" >
+                    <?php foreach($groups as $group):?>
+                    <option value="<?=$group['group_id']?>"><?=$group['name']?></option>
+                    <?php endforeach;?>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>头像：</td>
+                <td>
+                  <input type="file" name="photo" />
+
+                </td>
+              </tr>
+
+
+              <tr>
+                <td></td>
+                <td><input type="submit" value="提交"/></td>
+              </tr>
+            </table>
+          </form>
+        </div>
         <!-- PASTE above -->
       </div>
     </div>

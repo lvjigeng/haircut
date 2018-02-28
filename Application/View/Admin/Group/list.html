@@ -67,7 +67,7 @@
 
         <!-- nabar right -->
         <ul class="nav navbar-nav navbar-right" style="margin-top: 10px; margin-right: 5px">
-          <a href="#" ><strong>退出登录</strong></a>
+          <a href="index.php?p=Admin&c=Login&a=logout" ><strong>退出登录</strong></a>
 
         </ul>
         <!-- / navbar right -->
@@ -135,7 +135,7 @@
             <ul class="nav">
 
               <li ui-sref-active="active">
-                <a href="index.php?p=Admin&c=Index&a=index">
+                <a href="index.php?p=Admin&c=Members&a=index">
                   <i class="glyphicon glyphicon-th-large icon text-success"></i>
                   <span class="font-bold" translate="aside.nav.CALENDAR">后台首页</span>
                 </a>
@@ -200,13 +200,11 @@
                   <span class="font-bold" translate="aside.nav.DASHBOARD">店铺管理</span>
                 </a>
                 <ul class="nav nav-sub dk">
-
                   <li ui-sref-active="active">
                     <a href="index.php?p=Admin&c=Members&a=add">
                       <span>新增员工</span>
                     </a>
                   </li>
-
                   <li ui-sref-active="active">
                     <a href="index.php?p=Admin&c=Members&a=membersList">
                       <span>员工管理</span>
@@ -219,15 +217,12 @@
                       <span>新增部门</span>
                     </a>
                   </li>
-
                   <li ui-sref-active="active">
                     <a href="index.php?p=Admin&c=Group&a=groupList">
                       <b class="label bg-info pull-right">$</b>
                       <span>部门分类</span>
                     </a>
                   </li>
-
-
                 </ul>
               </li>
 
@@ -256,8 +251,41 @@
       <a href class="off-screen-toggle hide" data-toggle="class:off-screen" data-target=".app-aside" ></a>
       <div class="app-content-body fade-in-up">
         <!-- COPY the content from "tpl/" -->
-        <!-----------------首页主要内容------------------------------------>
+        <!-----------------员工列表------------------------------------>
+        <div class="note">
+          <h4>部门列表</h4>
+          <form method="post" action="index.php?p=Home&c=Article&a=articleList" class="search_form">
+            <!--<input type="hidden" name="act" value="index">用get搜索是做的-->
+            <!--<input type="hidden" name="c" value="Goods">-->
+            <input type="text" name="keywords" placeholder="请输入要搜索的关键词" value=""/>
+            <input type="submit" value="搜索"/>
+          </form>
+          <table class="news_list">
+            <thead>
+            <tr>
+              <th>名称</th>
 
+              <th>操作</th>
+            </tr>
+            <?php foreach($groups as $group):?>
+           <tr>
+
+             <td><?=$group['name']?></td>
+
+             <td><a href="index.php?p=Admin&c=Group&a=edit&id=<?=$group['group_id']?>">编辑</a>&emsp;<a href="index.php?p=Admin&c=Group&a=delete&id=<?=$group['group_id']?>">删除</a></td>
+           </tr>
+            <?php endforeach;?>
+            </thead>
+            <tbody>
+
+
+
+            </tbody>
+          </table>
+          <!--<div style="margin-left: 695px">-->
+          <!--<?=$html?>-->
+          <!--</div>-->
+        </div>
         <!-- PASTE above -->
       </div>
     </div>

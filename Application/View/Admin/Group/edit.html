@@ -200,13 +200,11 @@
                   <span class="font-bold" translate="aside.nav.DASHBOARD">店铺管理</span>
                 </a>
                 <ul class="nav nav-sub dk">
-
                   <li ui-sref-active="active">
                     <a href="index.php?p=Admin&c=Members&a=add">
                       <span>新增员工</span>
                     </a>
                   </li>
-
                   <li ui-sref-active="active">
                     <a href="index.php?p=Admin&c=Members&a=membersList">
                       <span>员工管理</span>
@@ -256,8 +254,26 @@
       <a href class="off-screen-toggle hide" data-toggle="class:off-screen" data-target=".app-aside" ></a>
       <div class="app-content-body fade-in-up">
         <!-- COPY the content from "tpl/" -->
-        <!-----------------首页主要内容------------------------------------>
+        <!-----------------员工添加------------------------------------>
+        <div class="note">
+          <h4>修改部门</h4>
+          <form action="index.php?p=Admin&c=Group&a=add" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="group_id" value="<?=$group['group_id']?>" >
+            <table class="news_form">
+              <tr>
+                <td>名称：</td>
+                <td><input type="text" name="name" class="inbox" value="<?=$group['name']?>" required/></td>
+              </tr>
 
+
+
+              <tr>
+                <td></td>
+                <td><input type="submit" value="提交"/></td>
+              </tr>
+            </table>
+          </form>
+        </div>
         <!-- PASTE above -->
       </div>
     </div>
