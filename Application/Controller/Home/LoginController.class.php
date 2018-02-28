@@ -22,7 +22,7 @@ class LoginController extends Controller
         $usersModel = new UsersModel();
         $users = $usersModel->check($username,$password);
         if ($users ===false){   //登录失败
-            self::redirect("index.php?p=Admin&c=Login&a=Login","登录失败".$usersModel->getError(),2);
+            self::redirect("index.php?p=Home&c=Login&a=Login","登录失败".$usersModel->getError(),2);
         }
         //成功 将用户信息保存到session中
         @session_start();
@@ -46,7 +46,7 @@ class LoginController extends Controller
         setcookie("id",null,-1,"/");
         setcookie("password",null,-1,"/");
         //3.跳转到登录页面
-        self::redirect("index.php?p=Admin&c=Login&a=Login","注销成功!",2);
+        self::redirect("index.php?p=Home&c=Index&a=index");
 
     }
 }

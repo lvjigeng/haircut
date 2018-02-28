@@ -19,6 +19,10 @@ class UsersModel extends Model
         //执行
         return $this->db->fetchRow($sql);
     }
+    //注册保存
+    public function add($data){
+
+    }
     //验证登录
     public function check($username,$password){
         //将传过来的用户名进行转义

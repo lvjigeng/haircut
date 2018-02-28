@@ -23,7 +23,7 @@ class UploadTool
             return false;
         }
 //2.判断上传图片格式
-        $img_allow_type = ['image/png', 'image/gif', 'image/jpeg'];
+        $img_allow_type = ['image/png', 'image/gif', 'image/jpeg','image/jpg'];
         if (!in_array($img_info['type'], $img_allow_type)) {
             $this->error = '上传格式不正确';
             return false;
