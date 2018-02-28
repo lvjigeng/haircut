@@ -21,7 +21,49 @@ class UsersModel extends Model
     }
     //注册保存
     public function add($data){
-
+        //用户名不能为空
+        if (empty($data['username'])){
+            $this->error = "用户名不能为空";
+            return false;
+        }
+        //真实姓名不能为空
+        if (empty($data['realname'])){
+            $this->error = "真实姓名不能为空";
+            return false;
+        }
+        //密码不能为空
+        if (empty($data['password'])){
+            $this->error = "密码不能为空";
+            return false;
+        }
+        //电话不能为空
+        if (empty($data['telephone'])){
+            $this->error = "电话不能为空";
+            return false;
+        }
+        //头像不能为空
+        if (empty($data['photo'])){
+            $this->error = "请上传头像";
+            return false;
+        }
+        //密码和确认密码一致
+        if($data['password'] != $data['repassword']){
+            $this->error = "密码和确认密码不一致";
+            return false;
+        }
+        //密码加密
+        $data['password'] = md5($data['password']);
+        //SQL语句
+        $sql = "insert into users set 
+username='{$data['username']}',
+realname='{$data['realname']}',
+password='{$data['password']}',
+sex='{$data['sex']}',
+telephone='{$data['telephone']}',
+photo='{$data['photo']}'
+";
+        //执行
+        return $this->db->execute($sql);
     }
     //验证登录
     public function check($username,$password){

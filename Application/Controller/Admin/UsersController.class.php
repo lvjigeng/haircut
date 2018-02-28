@@ -25,10 +25,6 @@ class UsersController extends Controller
 //            var_dump($_FILES);
             $data = $_POST;
             $photo = $_FILES['photo'];
-            if ($_FILES['photo']['error'] =="4"){  //没上传新图
-                self::redirect("index.php?p=Admin&c=Users&a=add","请上传头像",2);
-                die;
-            }
             //处理文件
             $upload = new UploadTool();
             $photo_url = $upload->up("user_photo",$photo); //返回图片路径
@@ -48,7 +44,12 @@ class UsersController extends Controller
             //处理数据
 //            var_dump($data);die;
             $usersModel = new UsersModel();
-            $usersModel->add($data);
+            $res = $usersModel->add($data);
+            if ($res ===false){  //注册失败
+                self::redirect("index.php?p=Admin&c=Users&a=add","注册失败".$usersModel->getError(),2);
+            }
+            //成功,跳转到首页
+            self::redirect("index.php?p=Home&c=Index&a=index");
             //显示页面
         }else{
             //展示添加页面
