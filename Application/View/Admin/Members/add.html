@@ -144,11 +144,11 @@
 
               <!--------------用户管理-------->
               <li>
-                <a href class="auto">      
-                  <span class="pull-right text-muted">
-                    <i class="fa fa-fw fa-angle-right text"></i>
-                    <i class="fa fa-fw fa-angle-down text-active"></i>
-                  </span>
+                <a href class="auto">
+                    <span class="pull-right text-muted">
+                      <i class="fa fa-fw fa-angle-right text"></i>
+                      <i class="fa fa-fw fa-angle-down text-active"></i>
+                    </span>
                   <i class="glyphicon glyphicon-stats icon text-primary-dker"></i>
                   <span class="font-bold" translate="aside.nav.DASHBOARD">会员管理</span>
                 </a>
@@ -159,27 +159,26 @@
                     </a>
                   </li>
                   <li ui-sref-active="active">
-                    <a href="#">
+                    <a href="index.php?p=Admin&c=Users&a=add">
+                      <span>新增会员</span>
+                    </a>
+                  </li>
+                  <li ui-sref-active="active">
+                    <a href="index.php?p=Admin&c=Users&a=index">
                       <span>会员列表</span>
                     </a>
                   </li>
                   <li ui-sref-active="active">
-                    <a href="#">
+                    <a href="index.php?p=Admin&c=Histories&a=recharge">
                       <b class="label bg-info pull-right">$</b>
                       <span>充值记录</span>
                     </a>
                   </li>
                   <li ui-sref-active="active">
-                    <a href="#">
+                    <a href="index.php?p=Admin&c=Histories&a=consumption">
                       <b class="label bg-info pull-right">$</b>
                       <span>消费记录</span>
                     </a>
-                  </li>
-                  <li ui-sref-active="active">
-                  <a href="#">
-                    <b class="label bg-info pull-right">$</b>
-                    <span>预约管理</span>
-                  </a>
                   </li>
                   <li>
                     <a href="#">
@@ -189,13 +188,13 @@
                   </li>
                 </ul>
               </li>
-              <!--------------活动区-------->
+              <!--------------店铺-------->
               <li>
                 <a href class="auto">
-                  <span class="pull-right text-muted">
-                    <i class="fa fa-fw fa-angle-right text"></i>
-                    <i class="fa fa-fw fa-angle-down text-active"></i>
-                  </span>
+                    <span class="pull-right text-muted">
+                      <i class="fa fa-fw fa-angle-right text"></i>
+                      <i class="fa fa-fw fa-angle-down text-active"></i>
+                    </span>
                   <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
                   <span class="font-bold" translate="aside.nav.DASHBOARD">店铺管理</span>
                 </a>
@@ -228,13 +227,101 @@
 
                 </ul>
               </li>
-
               <!--------------套餐管理--------->
-              <li ui-sref-active="active">
-                <a href="index.php?p=Admin&c=Members&a=index">
+              <li>
+                <a href class="auto">
+                    <span class="pull-right text-muted">
+                      <i class="fa fa-fw fa-angle-right text"></i>
+                      <i class="fa fa-fw fa-angle-down text-active"></i>
+                    </span>
                   <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
-                  <span class="font-bold" translate="aside.nav.CALENDAR">套餐管理</span>
+                  <span class="font-bold" translate="aside.nav.DASHBOARD">套餐管理</span>
                 </a>
+                <ul class="nav nav-sub dk">
+                  <li ui-sref-active="active">
+                    <a href="index.php?p=Admin&c=Plans&a=add">
+                      <span>新增套餐</span>
+                    </a>
+                  </li>
+                  <li ui-sref-active="active">
+                    <a href="index.php?p=Admin&c=Plans&a=index">
+                      <span>套餐列表</span>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+              <!--------------活动管理--------->
+              <li>
+                <a href class="auto">
+                    <span class="pull-right text-muted">
+                      <i class="fa fa-fw fa-angle-right text"></i>
+                      <i class="fa fa-fw fa-angle-down text-active"></i>
+                    </span>
+                  <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
+                  <span class="font-bold" translate="aside.nav.DASHBOARD">活动管理</span>
+                </a>
+                <ul class="nav nav-sub dk">
+                  <li ui-sref-active="active">
+                    <a href="index.php?p=Admin&c=Article&a=add">
+                      <span>新增活动</span>
+                    </a>
+                  </li>
+                  <li ui-sref-active="active">
+                    <a href="index.php?p=Admin&c=Article&a=index">
+                      <span>活动列表</span>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+              <!--------------代金券管理--------->
+              <li>
+                <a href class="auto">
+                    <span class="pull-right text-muted">
+                      <i class="fa fa-fw fa-angle-right text"></i>
+                      <i class="fa fa-fw fa-angle-down text-active"></i>
+                    </span>
+                  <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
+                  <span class="font-bold" translate="aside.nav.DASHBOARD">代金券管理</span>
+                </a>
+                <ul class="nav nav-sub dk">
+                  <li ui-sref-active="active">
+                    <a href="index.php?p=Admin&c=Codes&a=add">
+                      <span>新增代金券</span>
+                    </a>
+                  </li>
+                  <li ui-sref-active="active">
+                    <a href="index.php?p=Admin&c=Codes&a=index">
+                      <span>代金券列表</span>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+              <!--------------预约管理--------->
+              <li>
+                <a href class="auto">
+                    <span class="pull-right text-muted">
+                      <i class="fa fa-fw fa-angle-right text"></i>
+                      <i class="fa fa-fw fa-angle-down text-active"></i>
+                    </span>
+                  <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
+                  <span class="font-bold" translate="aside.nav.DASHBOARD">预约管理</span>
+                </a>
+                <ul class="nav nav-sub dk">
+                  <li ui-sref-active="active">
+                    <a href="index.php?p=Admin&c=Order&a=add">
+                      <span>新增预约</span>
+                    </a>
+                  </li>
+                  <li ui-sref-active="active">
+                    <a href="index.php?p=Admin&c=Order&a=index">
+                      <span>预约列表</span>
+                    </a>
+                  </li>
+
+                </ul>
               </li>
             </ul>
           </nav>

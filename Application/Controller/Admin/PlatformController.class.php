@@ -19,9 +19,9 @@ class PlatformController extends Controller
                 $id = $_COOKIE['id'];
                 $password = $_COOKIE['password'];
                 //验证对不对
-                $usersModel = new UsersModel();
+                $membersModel = new MembersModel();
                 //成功返回用户信息 失败返回false
-                $result = $usersModel->checkIdPwd($id,$password);
+                $result = $membersModel->checkIdPwd($id,$password);
                 if($result===false){//验证失败
                     //跳转登录功能
                     self::redirect("index.php?p=Admin&c=Login&a=Login","请登录",2);
