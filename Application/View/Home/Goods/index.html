@@ -268,73 +268,18 @@
               </div>
             </div>
           </div>
-          <div class="note">
-          <h4>活动列表</h4>
-          <form method="post" action="index.php?p=Home&c=Users&a=index" class="search_form">
-            <!--<input type="hidden" name="act" value="index">用get搜索是做的-->
-            <!--<input type="hidden" name="c" value="Goods">-->
-            <input type="text" name="keywords" placeholder="请输入要搜索的关键词" value=""/>
-            <input type="submit" value="搜索"/>
-          </form>
-          <table class="news_list">
-            <thead>
-            <tr>
-              <th>标题</th>
-              <th>内容</th>
-              <th>开始时间</th>
-              <th>结束时间</th>
-              <th>发表时间</th>
-            </tr>
-            <?php foreach($articles as $article):?>
-            <tr>
-              <td><?=$article['title']?></td>
-              <td><?=mb_substr($article['content'],0,30)?>...</td>
-              <td><?=date('Y-m-d',$article['start'])?></td>
-              <td><?=date('Y-m-d',$article['end'])?></td>
-              <td><?=date('Y-m-d',$article['time'])?></td>
-            </tr>
+          <div class="note" style="clear: both">
+          <h4>您当前积分为1198</h4>
+            <?php foreach($goods as $good):?>
+            <div style="width: 33.3333%;height:200px;float: left;border: solid 1px #c4d0d9;text-align: center">
+              <span>
+                <img src="<?=$good['img']?>" alt="">
+              </span>
+              <div>兑换积分:<?=$good['goods_integral']?></div>
+              <a href="index.php?p=Home&c=Goods&a=exchange&id=<?=$good['goods_id']?>"><button style="color: deepskyblue">立即兑换</button></a>
+            </div>
             <?php endforeach;?>
-            </thead>
-            <tbody>
-
-
-
-            </tbody>
-          </table>
-          <div style="margin-left:495px">
-            <?=$html?>
-          </div>
         </div>
-          <div class="note">
-            <h4>预约状态</h4>
-            <table class="news_list">
-              <thead>
-              <tr>
-                <th>电话</th>
-                <th>预约美发师</th>
-                <th>备注</th>
-                <th>预约日期</th>
-                <th>预约状态</th>
-                <th>回复信息</th>
-              </tr>
-              <?php foreach($orders as $order):?>
-              <tr>
-                <td><?=$order['phone']?></td>
-                <td><?=$order['barber']['realname']?></td>
-                <td><?=$order['content']?></td>
-                <td><?=date('Y-m-d',$order['date'])?></td>
-                <td><?=$order['status']==0?'未处理':'成功'?></td>
-                <td><?=empty($order['reply'])?'未回复':$order['reply']?></td>
-              </tr>
-              <?php endforeach;?>
-              </thead>
-              <tbody>
-
-
-
-              </tbody>
-            </table>
-          </div>
           <!--<div class="wrapper bg-white b-b">-->
           <!--<ul class="nav nav-pills nav-sm">-->
           <!--<li class="active"><a href>消费记录</a></li>-->
@@ -444,7 +389,6 @@
     <span class="pull-right">1.0.0 <a href="#app" class="m-l-sm text-muted"><i class="fa fa-long-arrow-up"></i></a></span>
     &copy; 2014 Copyright. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
   </div>
-  / footer
 </div>
 <!-- jQuery -->
 <script src="Public/Admin/personcenter/vendor/jquery/jquery.min.js"></script>
