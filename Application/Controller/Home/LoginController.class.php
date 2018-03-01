@@ -9,6 +9,9 @@ class LoginController extends Controller
     public function Login(){
         //接收数据
         //处理数据
+        if (isset($_SESSION['userinfo'])){
+            self::redirect("index.php?p=Admin&c=Users&a=index");
+        }
         //显示页面
         $this->display("login");
     }
