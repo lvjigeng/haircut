@@ -24,7 +24,7 @@ class OrderController extends Controller
             }
             //成功
             //显示页面
-            self::redirect("index.php?p=Admin&c=Users&a=index","预约成功,请稍后",2);
+            self::redirect("index.php?p=Home&c=Users&a=index","预约成功,请稍后",2);
         }else{
 //            var_dump($_SESSION['userinfo']);
             //获取员工信息

@@ -30,13 +30,9 @@
         <form action="index.php?p=Home&c=Order&a=add" method="post" enctype="multipart/form-data">
             <ul>
                 <li>
-                    <span>
-                        <label class="control-label">真实姓名：</label>
-                        <input type="text"  class="form-control form-underlined" name="realname" value="<?=$_SESSION['userinfo']['username']?>"/>
-                    </span>
                     <div>
                         <label class="control-label">Tel：</label>
-                        <input type="number" class="form-control form-underlined" name="telephone" value="<?=$_SESSION['userinfo']['telephone']?>"/>
+                        <input type="number" class="form-control form-underlined" name="telephone" placeholder="请填写11位电话号码"/>
                     </div>
                     <div>
                         <label class="control-label">预约美发师：</label>
@@ -47,7 +43,11 @@
                         </select>
                     </div>
                     <div>
-                        <label class="control-label">预约项目：</label>
+                        <label class="control-label">预约时间：</label>
+                        <input type="date" name="date" class="form-control form-underlined">
+                    </div>
+                    <div>
+                        <label class="control-label">备注：</label>
                         <input type="text" name="content" class="form-control form-underlined">
                     </div>
                 </li>

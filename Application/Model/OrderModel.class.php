@@ -14,29 +14,23 @@ class OrderModel extends Model
     }
     //保存预约数据
     public function add($data){
-        //真实姓名不能为空
-        if (empty($data['realname'])){
-            $this->error = "请填写姓名";
-            return false;
-        }
         //号码不能为空
         if (empty($data['telephone'])){
             $this->error = "请填写11位电话号码";
         }
-        //预约项目不能为空
-        if (empty($data['content'])){
-            $this->error = "请填写预约项目";
+        //预约时间不能为空
+        if (empty($data['date'])){
+            $this->error = "请填写预约时间";
             return false;
         }
         //预约时间
-        $time = time();
+        $data['date'] = strtotime($data['date']);
         //sql语句
         $sql = "insert into `order` set 
-realname='{$data['realname']}',
 phone='{$data['telephone']}',
 barber='{$data['barber']}',
 content='{$data['content']}',
-`date`='{$time}'
+`date`='{$data['date']}'
 ";
         //执行
         return $this->db->execute($sql);
