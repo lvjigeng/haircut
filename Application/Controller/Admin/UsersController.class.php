@@ -3,7 +3,7 @@
 /**
  * 会员控制器
  */
-class UsersController extends Controller
+class UsersController extends PlatformController
 {
     //会员列表
     public function index(){
