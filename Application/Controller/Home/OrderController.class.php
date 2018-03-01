@@ -3,7 +3,7 @@
 /**
  * 预约控制器
  */
-class OrderController extends Controller
+class OrderController extends PlatformController
 {
     //后台列表显示
     public function index(){

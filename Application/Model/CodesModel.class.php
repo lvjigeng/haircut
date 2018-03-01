@@ -77,4 +77,12 @@ class CodesModel extends Model
         return $rs;
     }
 
+    //根据id获取用户的代金券
+    public function getUserCodes($id){
+        //SQL语句
+        $sql = "select * from codes where user_id='{$id}'";
+        //执行
+        return $this->db->fetchAll($sql);
+    }
+
 }
