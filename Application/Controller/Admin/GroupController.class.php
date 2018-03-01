@@ -6,7 +6,7 @@
  * Date: 2018/2/28
  * Time: 18:32
  */
-class GroupController extends Controller
+class GroupController extends PlatformController
 {
     public function groupList(){
 

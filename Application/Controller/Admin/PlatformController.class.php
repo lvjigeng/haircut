@@ -12,7 +12,7 @@ class PlatformController extends Controller
     {
         //验证session中的登录信息
         @session_start();
-        if(!isset($_SESSION['userinfo'])){//验证cookie中没有登录信息,跳转到等页面
+        if(!isset($_SESSION['membersinfo'])){//验证cookie中没有登录信息,跳转到等页面
             //检测cookie中是否有id和password
             if(isset($_COOKIE['id']) && isset($_COOKIE['password'])){
                 //有id和password 就取出来
@@ -27,7 +27,7 @@ class PlatformController extends Controller
                     self::redirect("index.php?p=Admin&c=Login&a=Login","请登录",2);
                 }else{
                     //保存用户信息到session中
-                    $_SESSION['userinfo'] = $result;
+                    $_SESSION['membersinfo'] = $result;
                     return;
                 }
             }

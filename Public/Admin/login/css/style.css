@@ -21,7 +21,7 @@
   border-radius: 2px;
 }
 .login-contain header {
-  padding: 30px 0;
+  padding: 10px 0;
   text-align: center;
   color: #97a4b1;
   font-size: 14px;
@@ -1920,7 +1920,6 @@ dialog [class^="icon-"] {
 }
 .control-label {
   display: inline-block;
-  margin-bottom: 8px;
   color: #4f5f6f;
   font-weight: 700;
 }

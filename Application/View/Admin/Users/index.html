@@ -66,7 +66,7 @@
 
       <!-- nabar right -->
       <ul class="nav navbar-nav navbar-right" style="margin-top: 10px; margin-right: 5px">
-        <a href="index.php?p=Admin&c=Login&a=Login" ><strong>退出登录</strong></a>
+        <a href="index.php?p=Home&c=Login&a=logout" ><strong>退出登录</strong></a>
 
       </ul>
       <!-- / navbar right -->
@@ -85,7 +85,7 @@
           <div class="dropdown wrapper">
             <a ui-sref="app.page.profile">
                 <span class="thumb-lg w-auto-folded avatar m-t-sm">
-                  <img src="Public/Admin/personcenter/img/a0.jpg" class="img-full" alt="...">
+                  <img src="<?=$_SESSION['userinfo']['photo']?>" class="img-full" alt="...">
                 </span>
             </a>
             <a href="#" data-toggle="dropdown" class="dropdown-toggle hidden-folded">
@@ -133,7 +133,7 @@
         <nav ui-nav class="navi">
           <ul class="nav">
             <li ui-sref-active="active">
-              <a href="#">
+              <a href="index.php?p=Home&c=Index&a=index">
                 <i class="glyphicon glyphicon-list"></i>
                 <span class="font-bold" translate="aside.nav.CALENDAR">前台首页</span>
               </a>

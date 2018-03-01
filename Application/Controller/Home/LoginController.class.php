@@ -47,6 +47,5 @@ class LoginController extends Controller
         setcookie("password",null,-1,"/");
         //3.跳转到登录页面
         self::redirect("index.php?p=Home&c=Login&a=Login","注销成功!",2);
-
     }
 }

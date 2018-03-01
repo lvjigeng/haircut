@@ -6,7 +6,7 @@
  * Date: 2018/2/28
  * Time: 15:34
  */
-class IndexController extends Controller
+class IndexController extends PlatformController
 {
     public function index(){
         //接受数据

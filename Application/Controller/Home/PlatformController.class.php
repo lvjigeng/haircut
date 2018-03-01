@@ -24,7 +24,7 @@ class PlatformController extends Controller
                 $result = $usersModel->checkIdPwd($id,$password);
                 if($result===false){//验证失败
                     //跳转登录功能
-                    self::redirect("index.php?p=Admin&c=Login&a=Login","请登录",2);
+                    self::redirect("index.php?p=Home&c=Login&a=Login","请登录",2);
                 }else{
                     //保存用户信息到session中
                     $_SESSION['userinfo'] = $result;
@@ -32,7 +32,7 @@ class PlatformController extends Controller
                 }
             }
             //跳转登录功能
-            self::redirect("index.php?p=Admin&c=Login&a=Login","请登录",2);
+            self::redirect("index.php?p=Home&c=Login&a=Login","请登录",2);
         }
     }
 }

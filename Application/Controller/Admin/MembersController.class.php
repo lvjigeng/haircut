@@ -6,7 +6,7 @@ q<?php
  * Date: 2018/2/28
  * Time: 13:31
  */
-class MembersController extends Controller
+class MembersController extends PlatformController
 {
 
     public function membersList(){

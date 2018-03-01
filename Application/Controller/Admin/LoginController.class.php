@@ -19,6 +19,7 @@ class LoginController extends Controller
         $username = $_POST['username'];
         $password = $_POST['password'];
         //处理数据
+
         $membersModel = new MembersModel();
         $members = $membersModel->check($username,$password);
         if ($members ===false){   //登录失败
@@ -46,7 +47,7 @@ class LoginController extends Controller
         setcookie("id",null,-1,"/");
         setcookie("password",null,-1,"/");
         //3.跳转到登录页面
-        self::redirect("index.php?p=Admin&c=Login&a=Login","注销成功!",2);
+        self::redirect("index.php?p=Admin&c=Index&a=index");
 
     }
 }
