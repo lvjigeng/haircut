@@ -35,4 +35,50 @@ content='{$data['content']}',
         //执行
         return $this->db->execute($sql);
     }
+
+    //获取所有预约
+    public function gteAll($search,$page){
+        $where='';
+        if (!empty($search)){
+            $where=" where $search ";
+        }
+        //分页部分
+        $limit='';
+        $sql="select count(*) from `order`".$where;
+
+        //每页显示6条记录
+        $pageSize=6;
+        //总记录数
+        $count=$this->db->fetchColumn($sql);
+
+        //总页数
+        $totalPage=ceil($count/$pageSize);
+        //优化
+        $page=$page>$totalPage?$totalPage:$page;
+        $page=$page<1?1:$page;
+        //数据库limit的开始位置
+        $start_page=($page-1)*$pageSize;
+        $limit.=" limit $start_page,$pageSize";
+
+        $sql="select * from `order`".$where.$limit;
+//        echo '<pre>';
+//        var_dump($sql);exit;
+        $orders=$this->db->fetchAll($sql);
+        foreach ($orders as &$order){
+            $sql="select member_id,realname from members where member_id='{$order['barber']}'";
+            $order['member']=$this->db->fetchRow($sql);
+        }
+
+        return ['orders'=>$orders,'pageSize'=>$pageSize,'count'=>$count,'totalPage'=>$totalPage,'page'=>$page];
+    }
+
+    public function getEdit($data){
+        $sql="update `article` set 
+`title`='{$data['title']}',
+`content`='{$data['content']}',
+`start`='{$data['start']}',
+`end`='{$data['end']}' where article_id='{$data['id']}'";
+        $rs=$this->db->execute($sql);
+        return $rs;
+    }
 }

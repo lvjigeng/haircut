@@ -9,10 +9,27 @@
 class CodesController extends PlatformController
 {
     public function index(){
-
+        $search='';
+        if (!empty($_REQUEST['keywords'])){
+            $search=" `code` like '%{$_REQUEST['keywords']}%'";
+        }
+        $page=$_REQUEST['page']??1;
+        //删除请求里的分页 ,后面手动拼在url上
+        unset($_REQUEST['page']);
+        //url上的参数
+        $urlParams=http_build_query($_REQUEST);
+        //操作数据
         $codesModel=new CodesModel();
-        $codes=$codesModel->getAll();
+        $codes=$codesModel->getAll($search,$page);
+
+        //把数组里的键板为变量名值变为变量值
+        extract($codes);
+        //调用分页工具
+        $createPage=new PageTool();
+        $html=$createPage->show($count, $totalPage, $pageSize, $page, $urlParams);
+        //分配数据
         $this->assign('codes',$codes);
+        $this->assign('html',$html);
         //显示页面
         $this->display('list');
 
