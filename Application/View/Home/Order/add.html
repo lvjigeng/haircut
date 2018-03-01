@@ -30,19 +30,19 @@
         <form action="index.php?p=Home&c=Order&a=add" method="post" enctype="multipart/form-data">
             <ul>
                 <li>
-                    <div>
+                    <div style="margin-bottom: 10px">
                         <label class="control-label">Tel：</label>
                         <input type="number" class="form-control form-underlined" name="telephone" placeholder="请填写11位电话号码"/>
                     </div>
-                    <div>
-                        <label class="control-label">预约美发师：</label>
+                    <div style="margin-bottom: 10px">
+                        <span class="control-label" style="margin-bottom: 10px">预约美发师：</span>
                         <select name="barber" id="">
                             <?php foreach($members as $member):?>
                             <option value="<?=$member['member_id']?>"><?=$member['realname']?></option>
                             <?php endforeach;?>
                         </select>
                     </div>
-                    <div>
+                    <div style="margin-bottom: 10px">
                         <label class="control-label">预约时间：</label>
                         <input type="date" name="date" class="form-control form-underlined">
                     </div>
