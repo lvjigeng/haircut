@@ -344,7 +344,7 @@
         <!-----------------员工列表------------------------------------>
         <div class="note">
           <h4>部门列表</h4>
-          <form method="post" action="index.php?p=Home&c=Article&a=articleList" class="search_form">
+          <form method="post" action="index.php?p=Admin&c=Codes&a=index" class="search_form">
             <!--<input type="hidden" name="act" value="index">用get搜索是做的-->
             <!--<input type="hidden" name="c" value="Goods">-->
             <input type="text" name="keywords" placeholder="请输入要搜索的关键词" value=""/>
@@ -353,16 +353,19 @@
           <table class="news_list">
             <thead>
             <tr>
-              <th>名称</th>
-
+              <th>代码</th>
+              <th>所属人</th>
+              <th>金额</th>
               <th>操作</th>
             </tr>
-            <?php foreach($groups as $group):?>
+            <?php foreach($codes as $code):?>
            <tr>
 
-             <td><?=$group['name']?></td>
+             <td><?=$code['code']?></td>
+             <td><?=$code['user']['realname']?></td>
+             <td><?=$code['money']?></td>
 
-             <td><a href="index.php?p=Admin&c=Group&a=edit&id=<?=$group['group_id']?>">编辑</a>&emsp;<a href="index.php?p=Admin&c=Group&a=delete&id=<?=$group['group_id']?>">删除</a></td>
+             <td><a href="index.php?p=Admin&c=Codes&a=edit&id=<?=$code['code_id']?>">编辑</a>&emsp;<a href="index.php?p=Admin&c=Codes&a=delete&id=<?=$code['code_id']?>">删除</a></td>
            </tr>
             <?php endforeach;?>
             </thead>
@@ -372,9 +375,9 @@
 
             </tbody>
           </table>
-          <!--<div style="margin-left: 695px">-->
-          <!--<?=$html?>-->
-          <!--</div>-->
+          <div style="margin-left: 695px">
+          <?=$html?>
+          </div>
         </div>
         <!-- PASTE above -->
       </div>

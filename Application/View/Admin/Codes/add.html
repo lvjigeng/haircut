@@ -348,11 +348,17 @@
             <table class="news_form">
               <tr>
                 <td>代码：</td>
-                <td><input type="text" name="code" class="inbox" required/></td>
+                <td><input type="text" name="code" class="inbox" value="<?=substr(md5(time()),0,10)?>" /></td>
               </tr>
               <tr>
                 <td>所属人：</td>
-                <td><input type="text" name="user_id" class="inbox" required/></td>
+                <td>
+                  <select name="user_id">
+                    <?php foreach($users as $user):?>
+                    <option value="<?=$user['user_id']?>"><?=$user['realname']?></option>
+                    <?php endforeach;?>
+                  </select>
+                </td>
               </tr>
               <tr>
                 <td>金额：</td>

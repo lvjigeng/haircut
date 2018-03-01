@@ -343,8 +343,8 @@
         <!-- COPY the content from "tpl/" -->
         <!-----------------员工列表------------------------------------>
         <div class="note">
-          <h4>活动列表</h4>
-          <form method="post" action="index.php?p=Admin&c=Article&a=index" class="search_form">
+          <h4>预约列表</h4>
+          <form method="post" action="index.php?p=Admin&c=Order&a=index" class="search_form">
             <!--<input type="hidden" name="act" value="index">用get搜索是做的-->
             <!--<input type="hidden" name="c" value="Goods">-->
             <input type="text" name="keywords" placeholder="请输入要搜索的关键词" value=""/>
@@ -353,23 +353,31 @@
           <table class="news_list">
             <thead>
             <tr>
-              <th>标题</th>
-              <th>内容</th>
-              <th>开始时间</th>
-              <th>结束时间</th>
-              <th>发表时间</th>
+              <th>姓名</th>
+              <th>电话</th>
+              <th>预约美发师</th>
+              <th>备注</th>
+              <th>日期</th>
+              <th>预约状态</th>
+              <th>回复信息</th>
               <th>操作</th>
             </tr>
-            <?php foreach($articles as $article):?>
+            <?php foreach($orders as $order):?>
            <tr>
-            <td><?=$article['title']?></td>
-            <td><?=mb_substr($article['content'],0,30)?>...</td>
-            <td><?=date('Y-m-d',$article['start'])?></td>
-            <td><?=date('Y-m-d',$article['end'])?></td>
-            <td><?=date('Y-m-d',$article['time'])?></td>
-
-
-             <td><a href="index.php?p=Admin&c=Article&a=edit&id=<?=$article['article_id']?>">编辑</a>&emsp;<a href="index.php?p=Admin&c=Article&a=delete&id=<?=$article['article_id']?>">删除</a></td>
+            <td><?=$order['realname']?></td>
+            <td><?=$order['phone']?></td>
+            <td><?=$order['member']['realname']?></td>
+            <td><?=$order['content']?></td>
+            <td><?=date('Y-m-d',$order['date'])?></td>
+             <?php if($order['status']==-1):?>
+             <td>预约失败</td>
+             <?php elseif($order['status']==0):?>
+             <td>未处理</td>
+             <?php elseif($order['status']==1):?>
+             <td>预约成功</td>
+             <?php endif;?>
+             <td><?=$order['reply']?></td>
+             <td><a href="index.php?p=Admin&c=Order&a=edit&id=<?=$order['order_id']?>">编辑</a>&emsp;<a href="index.php?p=Admin&c=Order&a=delete&id=<?=$order['order_id']?>">删除</a></td>
            </tr>
             <?php endforeach;?>
             </thead>
