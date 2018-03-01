@@ -8,11 +8,32 @@ class UsersController extends PlatformController
     //会员列表
     public function index(){
         //接收数据
+        //接收数据
+        $search='';
+        if (!empty($_REQUEST['keywords'])){
+            $search=" `title` like '%{$_REQUEST['keywords']}%' or `content` like '%{$_REQUEST['keywords']}%'";
+        }
+        $page=$_REQUEST['page']??1;
+        //删除请求里的分页 ,后面手动拼在url上
+        unset($_REQUEST['page']);
+        //url上的参数
+        $urlParams=http_build_query($_REQUEST);
         //处理数据
         $usersModel = new UsersModel();
         $users = $usersModel->getAll();
+        $articles = $usersModel->getAllArticle($search,$page);
+        $orders = $usersModel->getOrder();
+//        var_dump($orders);die;
+        //把数组里的键板为变量名值变为变量值
+        extract($articles);
+        //调用分页工具
+        $createPage=new PageTool();
+        $html=$createPage->show($count, $totalPage, $pageSize, $page, $urlParams);
         //分配
         $this->assign("users",$users);
+        $this->assign('articles',$articles);
+        $this->assign('orders',$orders);
+        $this->assign('html',$html);
         //显示页面
         $this->display("index");
     }

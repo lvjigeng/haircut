@@ -129,6 +129,52 @@ photo='{$data['photo']}' where user_id='{$data['user_id']}'
         //执行
         return $this->db->execute($sql);
     }
+    //获取最新活动
+    public function getAllArticle($search,$page){
+        $where='';
+        if (!empty($search)){
+            $where=" where $search ";
+        }
+        //分页部分
+        $limit='';
+        $sql="select count(*) from article".$where;
+
+        //每页显示6条记录
+        $pageSize=6;
+        //总记录数
+        $count=$this->db->fetchColumn($sql);
+        //总页数
+        $totalPage=ceil($count/$pageSize);
+        //优化
+        $page=$page>$totalPage?$totalPage:$page;
+        $page=$page<1?1:$page;
+        //数据库limit的开始位置
+        $start_page=($page-1)*$pageSize;
+        $limit.=" limit $start_page,$pageSize";
+
+        $sql="select * from article".$where.$limit;
+//        echo '<pre>';
+//        var_dump($sql);exit;
+        $articles=$this->db->fetchAll($sql);
+        return ['articles'=>$articles,'pageSize'=>$pageSize,'count'=>$count,'totalPage'=>$totalPage,'page'=>$page];
+    }
+    //获取预约数据
+    public function getOrder(){
+        //SQL语句
+        $sql = "select * from `order`";
+        //执行
+        $orders =  $this->db->fetchAll($sql);
+        foreach ($orders as &$val){
+//            var_dump($val);die;
+            //sql
+            $sql_barber = "select realname from members where member_id='{$val['barber']}'";
+            //执行
+            $barber = $this->db->fetchrow($sql_barber);
+            $val['barber'] = $barber;
+        }
+//        var_dump($orders);die;
+        return $orders;
+    }
     //验证登录
     public function check($username,$password){
         //将传过来的用户名进行转义

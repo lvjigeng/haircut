@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="Public/Admin/personcenter/css/simple-line-icons.css" type="text/css" />
   <link rel="stylesheet" href="Public/Admin/personcenter/css/font.css" type="text/css" />
   <link rel="stylesheet" href="Public/Admin/personcenter/css/app.css" type="text/css" />
+  <link rel="stylesheet" href="Public/Admin/personcenter/css/index.css" type="text/css" />
 </head>
 <body>
 <div class="app app-header-fixed" id="app">
@@ -211,7 +212,7 @@
               </a>
               <ul class="nav nav-sub dk">
                 <li ui-sref-active="active">
-                  <a href="#">
+                  <a href="index.php?p=Home&c=Users&a=index">
                     <span>最新活动</span>
                   </a>
                 </li>
@@ -265,6 +266,73 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="note">
+          <h4>活动列表</h4>
+          <form method="post" action="index.php?p=Home&c=Users&a=index" class="search_form">
+            <!--<input type="hidden" name="act" value="index">用get搜索是做的-->
+            <!--<input type="hidden" name="c" value="Goods">-->
+            <input type="text" name="keywords" placeholder="请输入要搜索的关键词" value=""/>
+            <input type="submit" value="搜索"/>
+          </form>
+          <table class="news_list">
+            <thead>
+            <tr>
+              <th>标题</th>
+              <th>内容</th>
+              <th>开始时间</th>
+              <th>结束时间</th>
+              <th>发表时间</th>
+            </tr>
+            <?php foreach($articles as $article):?>
+            <tr>
+              <td><?=$article['title']?></td>
+              <td><?=mb_substr($article['content'],0,30)?>...</td>
+              <td><?=date('Y-m-d',$article['start'])?></td>
+              <td><?=date('Y-m-d',$article['end'])?></td>
+              <td><?=date('Y-m-d',$article['time'])?></td>
+            </tr>
+            <?php endforeach;?>
+            </thead>
+            <tbody>
+
+
+
+            </tbody>
+          </table>
+          <div style="margin-left:495px">
+            <?=$html?>
+          </div>
+        </div>
+          <div class="note">
+            <h4>预约状态</h4>
+            <table class="news_list">
+              <thead>
+              <tr>
+                <th>电话</th>
+                <th>预约美发师</th>
+                <th>备注</th>
+                <th>预约日期</th>
+                <th>预约状态</th>
+                <th>回复信息</th>
+              </tr>
+              <?php foreach($orders as $order):?>
+              <tr>
+                <td><?=$order['phone']?></td>
+                <td><?=$order['barber']['realname']?></td>
+                <td><?=$order['content']?></td>
+                <td><?=date('Y-m-d',$order['date'])?></td>
+                <td><?=$order['status']==0?'未处理':'成功'?></td>
+                <td><?=empty($order['reply'])?'未回复':$order['reply']?></td>
+              </tr>
+              <?php endforeach;?>
+              </thead>
+              <tbody>
+
+
+
+              </tbody>
+            </table>
           </div>
           <!--<div class="wrapper bg-white b-b">-->
           <!--<ul class="nav nav-pills nav-sm">-->
