@@ -67,7 +67,7 @@
 
         <!-- nabar right -->
         <ul class="nav navbar-nav navbar-right" style="margin-top: 10px; margin-right: 5px">
-          <a href="index.php?p=Admin&c=Login&a=logout" ><strong>退出登录</strong></a>
+          <a href="#" ><strong>退出登录</strong></a>
 
         </ul>
         <!-- / navbar right -->
@@ -341,51 +341,34 @@
       <a href class="off-screen-toggle hide" data-toggle="class:off-screen" data-target=".app-aside" ></a>
       <div class="app-content-body fade-in-up">
         <!-- COPY the content from "tpl/" -->
-        <!-----------------员工列表------------------------------------>
+        <!-----------------活动添加------------------------------------>
         <div class="note">
-          <h4>会员列表</h4>
-          <form method="post" action="index.php?p=Admin&c=Members&a=membersList" class="search_form">
-            <!--<input type="hidden" name="act" value="index">用get搜索是做的-->
-            <!--<input type="hidden" name="c" value="Goods">-->
-            <input type="text" name="keywords" placeholder="请输入要搜索的关键词" value=""/>
-            <input type="submit" value="搜索"/>
+          <h4>添加活动</h4>
+          <form action="index.php?p=Admin&c=Article&a=add" method="post" enctype="multipart/form-data">
+            <table class="news_form">
+              <tr>
+                <td>标题：</td>
+                <td><input type="text" name="title" class="inbox" required/></td>
+              </tr>
+              <tr>
+                <td>内容：</td>
+                <td><input type="text" name="content" class="inbox" required/></td>
+              </tr>
+              <tr>
+                <td>开始时间：</td>
+                <td><input type="date" name="start" class="inbox" required/></td>
+              </tr>
+              <tr>
+                <td> 结束时间：</td>
+                <td><input type="date" name="end" class="inbox" required/></td>
+              </tr>
+
+              <tr>
+                <td></td>
+                <td><input type="submit" value="提交"/></td>
+              </tr>
+            </table>
           </form>
-          <table class="news_list">
-            <thead>
-            <tr>
-              <th>头像</th>
-              <th>姓名</th>
-              <th>性别</th>
-              <th>电话</th>
-              <th>部门</th>
-              <th>是否管理员</th>
-              <th>最后登录时间</th>
-              <th>最后登录ip</th>
-              <th>操作</th>
-            </tr>
-            <?php foreach($members as $member):?>
-           <tr>
-             <td><img src="<?=$member['photo']?>" alt=""></td>
-             <td><?=$member['realname']?></td>
-             <td><?=$member['sex']==0?'女':'男'?></td>
-             <td><?=$member['telephone']?></td>
-             <td><?=$member['group']['name']?></td>
-             <td><?=$member['is_admin']==0?'否':'是'?></td>
-             <td><?=date('Y-m-d',$member['last_login_time'])?></td>
-             <td><?=long2ip($member['last_login_ip'])?></td>
-             <td><a href="index.php?p=Admin&c=Members&a=edit&id=<?=$member['member_id']?>">编辑</a>&emsp;<a href="index.php?p=Admin&c=Members&a=delete&id=<?=$member['member_id']?>">删除</a></td>
-           </tr>
-            <?php endforeach;?>
-            </thead>
-            <tbody>
-
-
-
-            </tbody>
-          </table>
-          <div style="margin-left: 695px">
-          <?=$html?>
-          </div>
         </div>
         <!-- PASTE above -->
       </div>

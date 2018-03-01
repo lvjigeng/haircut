@@ -343,8 +343,8 @@
         <!-- COPY the content from "tpl/" -->
         <!-----------------员工列表------------------------------------>
         <div class="note">
-          <h4>会员列表</h4>
-          <form method="post" action="index.php?p=Admin&c=Members&a=membersList" class="search_form">
+          <h4>活动列表</h4>
+          <form method="post" action="index.php?p=Home&c=Article&a=index" class="search_form">
             <!--<input type="hidden" name="act" value="index">用get搜索是做的-->
             <!--<input type="hidden" name="c" value="Goods">-->
             <input type="text" name="keywords" placeholder="请输入要搜索的关键词" value=""/>
@@ -353,27 +353,23 @@
           <table class="news_list">
             <thead>
             <tr>
-              <th>头像</th>
-              <th>姓名</th>
-              <th>性别</th>
-              <th>电话</th>
-              <th>部门</th>
-              <th>是否管理员</th>
-              <th>最后登录时间</th>
-              <th>最后登录ip</th>
+              <th>标题</th>
+              <th>内容</th>
+              <th>开始时间</th>
+              <th>结束时间</th>
+              <th>发表时间</th>
               <th>操作</th>
             </tr>
-            <?php foreach($members as $member):?>
+            <?php foreach($articles as $article):?>
            <tr>
-             <td><img src="<?=$member['photo']?>" alt=""></td>
-             <td><?=$member['realname']?></td>
-             <td><?=$member['sex']==0?'女':'男'?></td>
-             <td><?=$member['telephone']?></td>
-             <td><?=$member['group']['name']?></td>
-             <td><?=$member['is_admin']==0?'否':'是'?></td>
-             <td><?=date('Y-m-d',$member['last_login_time'])?></td>
-             <td><?=long2ip($member['last_login_ip'])?></td>
-             <td><a href="index.php?p=Admin&c=Members&a=edit&id=<?=$member['member_id']?>">编辑</a>&emsp;<a href="index.php?p=Admin&c=Members&a=delete&id=<?=$member['member_id']?>">删除</a></td>
+            <td><?=$article['title']?></td>
+            <td><?=mb_substr($article['content'],0,30)?>...</td>
+            <td><?=date('Y-m-d',$article['start'])?></td>
+            <td><?=date('Y-m-d',$article['end'])?></td>
+            <td><?=date('Y-m-d',$article['time'])?></td>
+
+
+             <td><a href="index.php?p=Admin&c=Article&a=edit&id=<?=$article['article_id']?>">编辑</a>&emsp;<a href="index.php?p=Admin&c=Article&a=delete&id=<?=$article['article_id']?>">删除</a></td>
            </tr>
             <?php endforeach;?>
             </thead>
