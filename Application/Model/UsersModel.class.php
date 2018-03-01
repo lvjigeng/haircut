@@ -65,6 +65,70 @@ photo='{$data['photo']}'
         //执行
         return $this->db->execute($sql);
     }
+    //修改保存
+    public function editSave($data){
+//        var_dump($data);
+        //用户名不能为空
+        if(empty($data['username'])){
+            $this->error = "用户名不能为空!";
+            return false;
+        }
+        //真实姓名不能为空
+        if(empty($data['realname'])){
+            $this->error = "真实姓名不能为空!";
+            return false;
+        }
+        //电话不能为空
+        if(empty($data['telephone'])){
+            $this->error = "电话号码不能为空!";
+            return false;
+        }
+        //判断是否填写了原密码
+        if (empty($data['oldpassword'])){
+            //没有填写
+            $sql = "update users set 
+username='{$data['username']}',
+realname='{$data['realname']}',
+sex='{$data['sex']}',
+telephone='{$data['telephone']}',
+photo='{$data['photo']}' where user_id='{$data['user_id']}'
+";
+        }else{
+            //填写了
+            //修改密码.先输入原密码
+            if(empty($data['password'])){
+                $this->error = "新密码不能为空!";
+                return false;
+            }
+            //新密码和确认密一致
+            if($data['password'] != $data['repassword']){
+                $this->error = "确认密码不一致!";
+                return false;
+            }
+            //根据会员id查询密码
+            $sql_password = "select password from users where user_id='{$data['user_id']}'";
+            //数据库的密码
+            $db_password = $this->db->fetchColumn($sql_password);
+            //将传过来的密码加密与数据库密码进行比对
+            if(md5($data['oldpassword']) != $db_password){
+                $this->error = "原密码错误!";
+                return false;
+            }
+            //如果正确  更新数据库
+            $password = md5($data['password']); //加密保存
+            //SQL语句
+            $sql = "update users set 
+username='{$data['username']}',
+realname='{$data['realname']}',
+sex='{$data['sex']}',
+telephone='{$data['telephone']}',
+password='{$password}',
+photo='{$data['photo']}' where user_id='{$data['user_id']}'
+";
+        }
+        //执行
+        return $this->db->execute($sql);
+    }
     //验证登录
     public function check($username,$password){
         //将传过来的用户名进行转义

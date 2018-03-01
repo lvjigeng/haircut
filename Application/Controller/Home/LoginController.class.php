@@ -9,6 +9,9 @@ class LoginController extends Controller
     public function Login(){
         //接收数据
         //处理数据
+        if (isset($_SESSION['userinfo'])){
+            self::redirect("index.php?p=Home&c=Users&a=index");
+        }
         //显示页面
         $this->display("login");
     }
@@ -35,7 +38,7 @@ class LoginController extends Controller
         }
         //显示页面
         //登录成功
-        self::redirect("index.php?p=Admin&c=Users&a=index");
+        self::redirect("index.php?p=Home&c=Users&a=index");
     }
     //退出登录
     public function logout(){
@@ -46,6 +49,6 @@ class LoginController extends Controller
         setcookie("id",null,-1,"/");
         setcookie("password",null,-1,"/");
         //3.跳转到登录页面
-        self::redirect("index.php?p=Home&c=Login&a=Login","注销成功!",2);
+        self::redirect("index.php?p=Home&c=Login&a=Login");
     }
 }

@@ -29,13 +29,13 @@ class UsersController extends PlatformController
             $upload = new UploadTool();
             $photo_url = $upload->up("user_photo",$photo); //返回图片路径
             if ($photo_url ===false){  //失败
-                self::redirect("index.php?p=Admin&c=Users&a=add","制作头像失败".$upload->getError(),2);
+                self::redirect("index.php?p=Home&c=Users&a=add","制作头像失败".$upload->getError(),2);
             }
             //成功 制作缩略图
             $imageTool = new ImageTool();
             $thumb_logo = $imageTool->thumbImage($photo_url,50,50);
             if ($thumb_logo ===false ){  //失败
-                self::redirect("index.php?p=Admin&c=Users&a=add","制作头像缩略图失败".$imageTool->getError(),2);
+                self::redirect("index.php?p=Home&c=Users&a=add","制作头像缩略图失败".$imageTool->getError(),2);
             }
             //成功就将缩略图保存到$data里
             $data['photo'] = $thumb_logo;
@@ -46,7 +46,7 @@ class UsersController extends PlatformController
             $usersModel = new UsersModel();
             $res = $usersModel->add($data);
             if ($res ===false){  //注册失败
-                self::redirect("index.php?p=Admin&c=Users&a=add","注册失败".$usersModel->getError(),2);
+                self::redirect("index.php?p=Home&c=Users&a=add","注册失败".$usersModel->getError(),2);
             }
             //成功,跳转到首页
             self::redirect("index.php?p=Home&c=Index&a=index");
@@ -63,13 +63,49 @@ class UsersController extends PlatformController
     public function edit(){
         if ($_SERVER['REQUEST_METHOD'] == "POST"){
             //修改保存
+            //接收数据
+            $data = $_POST;
+            //判断是否更改头像
+            if ($_FILES['photo']['error'] !="4"){ //不等于4就是上传了
+                //处理上传图片
+                $photo = $_FILES['photo'];
+                //处理文件
+                $upload = new UploadTool();
+                $photo_url = $upload->up("user_photo",$photo); //返回图片路径
+                if ($photo_url ===false){  //失败
+                    self::redirect("index.php?p=Home&c=Users&a=edit".$data['user_id'],"制作头像失败".$upload->getError(),2);
+                }
+                //成功 制作缩略图
+                $imageTool = new ImageTool();
+                $thumb_logo = $imageTool->thumbImage($photo_url,50,50);
+                if ($thumb_logo ===false ){  //失败
+                    self::redirect("index.php?p=Home&c=Users&a=edit".$data['user_id'],"制作头像缩略图失败".$imageTool->getError(),2);
+                }
+                //先删除原头像文件
+                @unlink($data['photo']);
+                //成功就将缩略图保存到$data里
+                $data['photo'] = $thumb_logo;
+                //删除原图片
+                @unlink($photo_url);
+            }
+            //处理数据
+            $usersModel = new UsersModel();
+            $res = $usersModel->editSave($data);
+            if ($res ===false){
+                self::redirect("index.php?p=Home&c=Users&a=edit".$data['user_id'],"修改个人资料失败".$usersModel->getError(),2);
+            }
+            //成功,跳到登录界面
+            self::redirect("index.php?p=Home&c=Login&a=logout");
+            //显示页面
+
         }else{
             //回显
             //接收数据
-            $id = $_GET['id'];
+            $id = $_SESSION['userinfo']['user_id'];
             //处理数据
             $usersModel = new UsersModel();
             $user = $usersModel->getOne($id);
+//            var_dump($user);
             //分配
             $this->assign($user);
             //显示页面
