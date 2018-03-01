@@ -71,13 +71,17 @@ content='{$data['content']}',
 
         return ['orders'=>$orders,'pageSize'=>$pageSize,'count'=>$count,'totalPage'=>$totalPage,'page'=>$page];
     }
-
+    //获取修改需要回显的一条数据
+    public function getRow($id){
+        $sql="select * from `order` where order_id='{$id}'";
+        $order=$this->db->fetchRow($sql);
+        return $order;
+    }
+    //处理预约(修改)
     public function getEdit($data){
-        $sql="update `article` set 
-`title`='{$data['title']}',
-`content`='{$data['content']}',
-`start`='{$data['start']}',
-`end`='{$data['end']}' where article_id='{$data['id']}'";
+        $sql="update `order` set 
+`status`='{$data['status']}',
+ `reply`='{$data['reply']}' where order_id='{$data['id']}'";
         $rs=$this->db->execute($sql);
         return $rs;
     }

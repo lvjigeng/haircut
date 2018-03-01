@@ -66,14 +66,14 @@ class OrderController extends Controller
         }
     }
 
-    //后代预约修改
+    //预约修改
     public function edit(){
         if ($_SERVER['REQUEST_METHOD']=='POST'){
             $data=$_POST;
             $orderModel=new OrderModel();
             $rs=$orderModel->getEdit($data);
             if ($rs===false){
-                self::redirect("index.php?p=Admin&c=Order&a=edit&id={$data['id']}",'修改失败!!',2);
+                self::redirect("index.php?p=Admin&c=Order&a=edit&id={$data['id']}",'处理失败!!',2);
             }
             self::redirect('index.php?p=Admin&c=Order&a=index');
         }

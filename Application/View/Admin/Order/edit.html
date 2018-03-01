@@ -67,7 +67,7 @@
 
         <!-- nabar right -->
         <ul class="nav navbar-nav navbar-right" style="margin-top: 10px; margin-right: 5px">
-          <a href="index.php?p=Admin&c=Login&a=logout" ><strong>退出登录</strong></a>
+          <a href="#" ><strong>退出登录</strong></a>
 
         </ul>
         <!-- / navbar right -->
@@ -341,55 +341,52 @@
       <a href class="off-screen-toggle hide" data-toggle="class:off-screen" data-target=".app-aside" ></a>
       <div class="app-content-body fade-in-up">
         <!-- COPY the content from "tpl/" -->
-        <!-----------------员工列表------------------------------------>
+        <!-----------------员工添加------------------------------------>
         <div class="note">
-          <h4>预约列表</h4>
-          <form method="post" action="index.php?p=Admin&c=Order&a=index" class="search_form">
-            <!--<input type="hidden" name="act" value="index">用get搜索是做的-->
-            <!--<input type="hidden" name="c" value="Goods">-->
-            <input type="text" name="keywords" placeholder="请输入要搜索的关键词" value=""/>
-            <input type="submit" value="搜索"/>
+          <h4>预约处理</h4>
+          <form action="index.php?p=Admin&c=Order&a=edit" method="post" enctype="multipart/form-data">
+            <td><input type="hidden" name="id"  value="<?=$order['order_id']?>" /></td>
+            <table class="news_form">
+              <tr>
+                <td>姓名：</td>
+                <td><input type="text" name="realname" class="inbox" value="<?=$order['realname']?>"  required/></td>
+              </tr>
+              <tr>
+                <td>电话：</td>
+                <td><input type="text" name="phone" class="inbox" value="<?=$order['phone']?>"  required/></td>
+              </tr>
+
+              <tr>
+                <td>预约美发师：</td>
+                <td><input type="text" name="barber" class="inbox" value="<?=$order['content']?>" required/></td>
+              </tr>
+
+              <tr>
+                <td>日期：</td>
+                <td><input type="text" name="barber" class="inbox" value="<?=date('Y-m-d',$order['date'])?>" required/></td>
+              </tr>
+
+              <tr>
+                <td>预约处理：</td>
+                <td>
+                  <select name="status" >
+                    <option value="-1">预约拒绝</option>
+                    <option value="1" selected>预约成功</option>
+                  </select>
+                </td>
+              </tr>
+
+              <tr>
+                <td>回复：</td>
+                <td><textarea name="reply" id="" cols="30" rows="10"></textarea></td>
+              </tr>
+
+              <tr>
+                <td></td>
+                <td><input type="submit" value="提交"/></td>
+              </tr>
+            </table>
           </form>
-          <table class="news_list">
-            <thead>
-            <tr>
-              <th>姓名</th>
-              <th>电话</th>
-              <th>预约美发师</th>
-              <th>备注</th>
-              <th>日期</th>
-              <th>预约状态</th>
-              <th>回复信息</th>
-              <th>操作</th>
-            </tr>
-            <?php foreach($orders as $order):?>
-           <tr>
-            <td><?=$order['realname']?></td>
-            <td><?=$order['phone']?></td>
-            <td><?=$order['member']['realname']?></td>
-            <td><?=$order['content']?></td>
-            <td><?=date('Y-m-d',$order['date'])?></td>
-             <?php if($order['status']==-1):?>
-             <td>预约失败</td>
-             <?php elseif($order['status']==0):?>
-             <td>未处理</td>
-             <?php elseif($order['status']==1):?>
-             <td>预约成功</td>
-             <?php endif;?>
-             <td><?=$order['reply']?></td>
-             <td><a href="index.php?p=Admin&c=Order&a=edit&id=<?=$order['order_id']?>">预约处理</a>&emsp;<a href="index.php?p=Admin&c=Order&a=delete&id=<?=$order['order_id']?>">删除</a></td>
-           </tr>
-            <?php endforeach;?>
-            </thead>
-            <tbody>
-
-
-
-            </tbody>
-          </table>
-          <div style="margin-left: 695px">
-          <?=$html?>
-          </div>
         </div>
         <!-- PASTE above -->
       </div>
