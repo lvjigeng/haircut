@@ -381,7 +381,7 @@
 			<div class="col-lg-12 wow slideInUp" data-wow-duration="1s" data-wow-delay=".2s">
 				<div class="service-right">
 					<div class="cut-content head-team">
-						<h4>Cutting</h4>
+						<h4>优惠套餐</h4>
 					</div>
 					<div class="service-images">
 						<a href="#"><img src="Public/Home/img/service/service1.jpg" alt=""></a>
@@ -396,52 +396,19 @@
 						<table class=" table table-striped">
 							<thead>
 								<tr>
-									<th>Cut</th>
-									<th>Womens</th>
-									<th>Mens</th>
+									<th>套餐名</th>
+									<th>介绍</th>
+									<th>价格$</th>
 								</tr>
 							</thead>
 							<tbody>
+							<?php foreach($plans as $plan):?>
 								<tr>
-									<td>Styles</td>
-									<td>$100</td>
-									<td>$90</td>
+									<td><?=$plan['name']?></td>
+									<td><?=$plan['desc']?></td>
+									<td>$<?=$plan['money']?></td>
 								</tr>
-								<tr>
-									<td>Master Stylist</td>
-									<td>$110</td>
-									<td>$100</td>
-								</tr>
-									<tr>
-									<td>Celebrity Stylist</td>
-									<td>$160</td>
-									<td>$150</td>
-								</tr>
-								<tr>
-									<td>Baby Cut</td>
-									<td>$70</td>
-									<td>$60</td>
-								</tr>
-								<tr>
-									<td>Comon Stylist</td>
-									<td>$50</td>
-									<td>$50</td>
-								</tr>
-								<tr>
-									<td>General</td>
-									<td>$80</td>
-									<td>$60</td>
-								</tr>
-								<tr>
-									<td>Mini Cut</td>
-									<td>$40</td>
-									<td>$40</td>
-								</tr>
-								<tr>
-									<td>Cut</td>
-									<td>$50</td>
-									<td>$50</td>
-								</tr>
+							<?php endforeach;?>
 							</tbody>
 						</table>
 					</div>
@@ -456,53 +423,20 @@
 					<div class="table-content left-content table-responsive">
 						<table class=" table table-striped">
 							<thead>
-								<tr>
-									<th>facial</th>
-									<th>Womens</th>
-									<th>Mens</th>
-								</tr>
+							<tr>
+								<th>套餐名</th>
+								<th>介绍</th>
+								<th>价格$</th>
+							</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>Standerd</td>
-									<td>$100</td>
-									<td>$90</td>
-								</tr>
-								<tr>
-									<td>Special</td>
-									<td>$110</td>
-									<td>$100</td>
-								</tr>
-									<tr>
-									<td>Celebrity face</td>
-									<td>$160</td>
-									<td>$150</td>
-								</tr>
-								<tr>
-									<td>Mackup</td>
-									<td>$70</td>
-									<td>$60</td>
-								</tr>
-								<tr>
-									<td>Regular</td>
-									<td>$50</td>
-									<td>$50</td>
-								</tr>
-								<tr>
-									<td>General</td>
-									<td>$80</td>
-									<td>$60</td>
-								</tr>
-								<tr>
-									<td>Body spa</td>
-									<td>$240</td>
-									<td>$240</td>
-								</tr>
-								<tr>
-									<td>Styles</td>
-									<td>$50</td>
-									<td>$50</td>
-								</tr>
+							<?php foreach($plans as $plan):?>
+							<tr>
+								<td><?=$plan['name']?></td>
+								<td><?=$plan['desc']?></td>
+								<td>$<?=$plan['money']?></td>
+							</tr>
+							<?php endforeach;?>
 							</tbody>
 						</table>
 					</div>
@@ -510,7 +444,7 @@
 				<!-- end table -->
 				<div class="service-right">
 				   <div class="cut-content head-team">
-						<h4>Special facial</h4>
+						<h4>特殊服务</h4>
 					</div>
 					<div class="service-images">
 						<a href="#"><img src="Public/Home/img/service/service2.jpg" alt=""></a>
@@ -527,7 +461,7 @@
 			<div class="col-lg-12 wow slideInUp" data-wow-duration="1s" data-wow-delay=".2s">
 				<div class="service-right">
 					<div class="cut-content head-team">
-						<h4>Other Services</h4>
+						<h4>最新活动</h4>
 					</div>
 					<div class="service-images">
 						<a href="#"><img src="Public/Home/img/service/service3.jpg" alt=""></a>
@@ -542,52 +476,23 @@
 						<table class=" table table-striped">
 							<thead>
 								<tr>
-									<th>Services</th>
-									<th>Womens</th>
-									<th>Mens</th>
+									<th>标题</th>
+									<th>内容</th>
+									<th>开始时间</th>
+									<th>结束时间</th>
+									<th>发布时间</th>
 								</tr>
 							</thead>
 							<tbody>
+							<?php foreach($articles as $article):?>
 								<tr>
-									<td>Colors</td>
-									<td>$100</td>
-									<td>$90</td>
+									<td><?=$article['title']?></td>
+									<td><?=$article['content']?></td>
+									<td><?=date('Ymd',$article['start'])?></td>
+									<td><?=date('Ymd',$article['end'])?></td>
+									<td><?=date('Ymd',$article['time'])?></td>
 								</tr>
-								<tr>
-									<td>Red Colors</td>
-									<td>$110</td>
-									<td>$100</td>
-								</tr>
-									<tr>
-									<td>Celebrity</td>
-									<td>$160</td>
-									<td>$150</td>
-								</tr>
-								<tr>
-									<td>Body Masege</td>
-									<td>$70</td>
-									<td>$60</td>
-								</tr>
-								<tr>
-									<td>Comon Color</td>
-									<td>$50</td>
-									<td>$50</td>
-								</tr>
-								<tr>
-									<td>General</td>
-									<td>$80</td>
-									<td>$60</td>
-								</tr>
-								<tr>
-									<td>Black Hair</td>
-									<td>$40</td>
-									<td>$40</td>
-								</tr>
-								<tr>
-									<td>Broun Clors</td>
-									<td>$50</td>
-									<td>$50</td>
-								</tr>
+							<?php endforeach;?>
 							</tbody>
 						</table>
 					</div>

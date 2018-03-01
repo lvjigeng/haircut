@@ -8,7 +8,31 @@ class IndexController extends Controller
     //前台页面
     public function index(){
         //接收数据
+        $search='';
+        if (!empty($_REQUEST['keywords'])){
+            $search=" `title` like '%{$_REQUEST['keywords']}%' or `content` like '%{$_REQUEST['keywords']}%'";
+        }
+        $page=$_REQUEST['page']??1;
+        //删除请求里的分页 ,后面手动拼在url上
+        unset($_REQUEST['page']);
+        //url上的参数
+        $urlParams=http_build_query($_REQUEST);
         //处理数据
+        //活动
+        $articleModel = new ArticleModel();
+        $articles = $articleModel->gteAll($search,$page);
+        //套餐
+        $plansModel = new PlansModel();
+        $plans = $plansModel->gteAll($search,$page);
+//        var_dump($articles);die;
+        extract($articles);
+//        var_dump($articles);die;
+        extract($plans);
+//        var_dump($plans);die;
+        //分配
+        $this->assign("articles",$articles);
+        $this->assign("plans",$plans);
+
         //显示页面
         $this->display("index");
     }
