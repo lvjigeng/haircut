@@ -213,7 +213,6 @@ photo='{$data['photo']}'
     //消费
     public function getConsume($data){
 
-
         //查询用户余额是否足够
         $sql="select * from users where user_id='{$data['user_id']}'";
         //余额
@@ -232,7 +231,26 @@ photo='{$data['photo']}'
         if (empty($code_money)){
             $code_money=0;
         }
-        
+        //如果消费金额大于代金券金额
+        if ($data['money']>$code_money){
+            //修改user表里面的金额
+            try{
+                $this->db->pdo->beginTransaction();
+                $sql="update users set 
+money=money+'{$code_money}'-'{$data['money']}',
+integral=integral+'{$data['money']}' where user_id='{$data['user_id']}'
+";
+                $this->db->pdo->exec($sql);
+                //在histories表里添加消费记录
+                
+
+            }catch (ErrorException $e){
+
+            }
+        }
+
+
+
     }
     //修改保存
     public function editSave($data){
