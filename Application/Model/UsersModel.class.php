@@ -6,11 +6,33 @@
 class UsersModel extends Model
 {
     //获取全部数据
-    public function getAll(){
-        //SQL语句
-        $sql = "select * from users";
-        //执行
-        return $this->db->fetchAll($sql);
+    public function getAll($search,$page){
+        $where='';
+        if (!empty($search)){
+            $where=" where $search ";
+        }
+        //分页部分
+        $limit='';
+        $sql="select count(*) from users".$where;
+
+        //每页显示6条记录
+        $pageSize=8;
+        //总记录数
+        $count=$this->db->fetchColumn($sql);
+        //总页数
+        $totalPage=ceil($count/$pageSize);
+        //优化
+        $page=$page>$totalPage?$totalPage:$page;
+        $page=$page<1?1:$page;
+        //数据库limit的开始位置
+        $start_page=($page-1)*$pageSize;
+        $limit.=" limit $start_page,$pageSize";
+
+        $sql="select * from users".$where.$limit;
+//        echo '<pre>';
+//        var_dump($sql);exit;
+        $users=$this->db->fetchAll($sql);
+        return ['users'=>$users,'pageSize'=>$pageSize,'count'=>$count,'totalPage'=>$totalPage,'page'=>$page];
     }
     //获取一条数据
     public function getOne($id){

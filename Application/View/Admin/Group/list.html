@@ -168,24 +168,7 @@
                       <span>会员列表</span>
                     </a>
                   </li>
-                  <li ui-sref-active="active">
-                    <a href="index.php?p=Admin&c=Histories&a=recharge">
-                      <b class="label bg-info pull-right">$</b>
-                      <span>充值记录</span>
-                    </a>
-                  </li>
-                  <li ui-sref-active="active">
-                    <a href="index.php?p=Admin&c=Histories&a=consumption">
-                      <b class="label bg-info pull-right">$</b>
-                      <span>消费记录</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <b class="badge bg-success pull-right">70%</b>
-                      <span translate="aside.nav.your_stuff.PROFILE">修改个人资料</span>
-                    </a>
-                  </li>
+
                 </ul>
               </li>
               <!--------------店铺-------->
@@ -224,6 +207,30 @@
                     </a>
                   </li>
 
+
+                </ul>
+              </li>
+              <!--------------充值活动--------->
+              <li>
+                <a href class="auto">
+                    <span class="pull-right text-muted">
+                      <i class="fa fa-fw fa-angle-right text"></i>
+                      <i class="fa fa-fw fa-angle-down text-active"></i>
+                    </span>
+                  <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
+                  <span class="font-bold" translate="aside.nav.DASHBOARD">充值活动</span>
+                </a>
+                <ul class="nav nav-sub dk">
+                  <li ui-sref-active="active">
+                    <a href="index.php?p=Admin&c=Recharge&a=add">
+                      <span>新增充值活动</span>
+                    </a>
+                  </li>
+                  <li ui-sref-active="active">
+                    <a href="index.php?p=Admin&c=Recharge&a=index">
+                      <span>充值活动列表</span>
+                    </a>
+                  </li>
 
                 </ul>
               </li>
@@ -344,12 +351,7 @@
         <!-----------------员工列表------------------------------------>
         <div class="note">
           <h4>部门列表</h4>
-          <form method="post" action="index.php?p=Admin&c=Group&a=groupList" class="search_form">
-            <!--<input type="hidden" name="act" value="index">用get搜索是做的-->
-            <!--<input type="hidden" name="c" value="Goods">-->
-            <input type="text" name="keywords" placeholder="请输入要搜索的关键词" value=""/>
-            <input type="submit" value="搜索"/>
-          </form>
+
           <table class="news_list">
             <thead>
             <tr>

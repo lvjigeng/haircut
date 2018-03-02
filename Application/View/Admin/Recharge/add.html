@@ -350,34 +350,18 @@
         <!-- COPY the content from "tpl/" -->
         <!-----------------员工添加------------------------------------>
         <div class="note">
-          <h4>修改代金券</h4>
-          <form action="index.php?p=Admin&c=Codes&a=edit" method="post" enctype="multipart/form-data">
-            <td><input type="hidden" name="id"  value="<?=$code['code_id']?>" /></td>
+          <h4>修改充值</h4>
+          <form action="index.php?p=Admin&c=Recharge&a=add" method="post" enctype="multipart/form-data">
+
             <table class="news_form">
               <tr>
-                <td>代码：</td>
-                <td><input type="text" name="code" class="inbox" value="<?=$code['code']?>"  required/></td>
+                <td>充值金额：</td>
+                <td><input type="text" name="recharge_money" class="inbox" required/></td>
               </tr>
+
               <tr>
-                <td>所属人：</td>
-                <td>
-                  <select name="user_id" id="">
-                    <?php foreach($users as $user):?>
-                    <option value="<?=$user['user_id']?>"><?=$user['realname']?></option>
-                    <?php endforeach;?>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>金额：</td>
-                <td><input type="text" name="money" class="inbox" value="<?=$code['money']?>" required/></td>
-              </tr>
-              <tr>
-                <td>状态：</td>
-                <td>
-                  <label>未使用:<input type="radio" name="status"  value="0" <?=$code['status']==0?'checked':''?>/></label>&emsp;&emsp;
-                  <label>已使用:<input type="radio" name="status"  value="1" <?=$code['status']==1?'checked':''?>/></label>
-                </td>
+                <td>赠送金额：</td>
+                <td><input type="text" name="handsel_money" class="inbox"  required/></td>
               </tr>
 
 
