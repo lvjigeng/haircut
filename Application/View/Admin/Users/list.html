@@ -387,6 +387,7 @@
               <th>性别</th>
               <th>电话</th>
               <th>余额</th>
+              <th>积分</th>
               <th>vip等级</th>
               <th>操作</th>
             </tr>
@@ -398,6 +399,7 @@
              <td><?=$user['sex']==0?'女':'男'?></td>
              <td><?=$user['telephone']?></td>
              <td><?=$user['money']?></td>
+             <td><?=$user['integral']?></td>
              <?php if($user['vip_rank']==0):?>
              <td>普通会员</td>
              <?php elseif($user['vip_rank']==1):?>
@@ -416,7 +418,7 @@
                 <a href="index.php?p=Admin&c=Users&a=recharge&id=<?=$user['user_id']?>"><button class="button1">充值</button></a>
                 <a href="index.php?p=Admin&c=Users&a=rechargeRecord&id=<?=$user['user_id']?>"><button class="button2">充值记录</button></a>
                 <a href="index.php?p=Admin&c=Users&a=consume&id=<?=$user['user_id']?>"><button class="button1">消费</button></a>
-                <a href="index.php?p=Admin&c=Users&a=edit&id=<?=$user['user_id']?>"><button class="button2">消费记录</button></a>
+                <a href="index.php?p=Admin&c=Users&a=consumeRecord&id=<?=$user['user_id']?>"><button class="button2">消费记录</button></a>
 
               </td>
              <!--<td><a href="index.php?p=Admin&c=Users&a=edit&id=<?=$user['user_id']?>">编辑</a>&emsp;<a href="index.php?p=Admin&c=Users&a=delete&id=<?=$user['user_id']?>">删除</a></td>-->

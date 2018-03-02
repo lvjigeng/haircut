@@ -183,18 +183,16 @@ photo='{$data['photo']}'
     }
     //充值记录
     public function getRechargeRecord($page,$id){
-        $where='';
-        if (!empty($search)){
-            $where=" where $search ";
-        }
+
         //分页部分
         $limit='';
-        $sql="select count(*) from users".$where;
+        $sql="select count(*) from histories where user_id='{$id}' and `type`=1";
 
         //每页显示6条记录
         $pageSize=8;
         //总记录数
         $count=$this->db->fetchColumn($sql);
+
         //总页数
         $totalPage=ceil($count/$pageSize);
         //优化
@@ -203,7 +201,8 @@ photo='{$data['photo']}'
         //数据库limit的开始位置
         $start_page=($page-1)*$pageSize;
         $limit.=" limit $start_page,$pageSize";
-        $sql="select * from histories where user_id='{$id}'".$where.$limit;
+        $sql="select * from histories where user_id='{$id}' and `type`=1 order by history_id DESC".$limit;
+
         $records=$this->db->fetchAll($sql);
 
         foreach ($records as &$record){
@@ -233,29 +232,169 @@ photo='{$data['photo']}'
         //查询代金券金额
         $sql="select money from codes where code_id='{$data['code_id']}'";
         $code_money=$this->db->fetchColumn($sql);
+        //时间
+        $time=time();
+        //如果不使用代金券
         if (empty($code_money)){
             $code_money=0;
         }
+
         //如果消费金额大于代金券金额
-        if ($data['money']>$code_money){
+        if ($data['money']>=$code_money){
+            //打完折和使用消费券后的消费金额
+            $consume_money=($data['money']-$code_money)*$discount;
+            //优惠金额
+            $handsel_money=$data['money']-$consume_money;
+            //积分
+            $integral=$data['money']-$code_money;
+            //余额
+            $balance=$user['money']-$consume_money;
             //修改user表里面的金额
             try{
                 $this->db->pdo->beginTransaction();
                 $sql="update users set 
-money=money+'{$code_money}'-'{$data['money']}',
-integral=integral+'{$data['money']}' where user_id='{$data['user_id']}'
+money=money-$consume_money,
+integral=integral+'{$integral}' where user_id='{$data['user_id']}'
 ";
                 $this->db->pdo->exec($sql);
                 //在histories表里添加消费记录
-                
+                $sql="insert into histories set 
+user_id='{$data['user_id']}',
+member_id='{$data['member_id']}',
+amount='{$data['money']}',
+handsel_money='{$handsel_money}',
+money=$balance,
+`type`=0,
+`time`='{$time}'
+";
 
+                $this->db->pdo->exec($sql);
+                if ($data['code_id']!=0){
+                    $sql="update codes set money=0,status=1 where code_id='{$data['code_id']}'";
+                    $this->db->pdo->exec($sql);
+
+                }
+
+                $this->db->pdo->commit();
             }catch (ErrorException $e){
-
+                $this->db->pdo->rollBack();
+                $this->error=$e->getMessage();
+                return false;
             }
+        }
+        //消费金额小于代金券,如果使用代金券就扣代金券的钱,代金券可以多次使用.不是用就扣余额的钱
+        else{
+            try{
+                $this->db->pdo->beginTransaction();
+                //使用代金券消费
+                if ($data['code_id']!=0){
+
+                    //消费金额等于代金券金额,代金券就已经使用完了,需要更改状态
+                    if($data['money']==$code_money){
+                        echo '<pre>';
+                        var_dump(11);exit;
+                        $sql="update codes set money=0, `type`=1 where code_id='{$data['code_id']}'";
+                        $this->db->pdo->exec($sql);
+                        //在histories表里添加消费记录
+                        $sql="insert into histories set 
+user_id='{$data['user_id']}',
+member_id='{$data['member_id']}',
+amount='{$data['money']}',
+handsel_money='{$data['money']}',
+money='{$user['money']}',
+`type`=0,
+`time`='{$time}'
+";
+                        $this->db->pdo->exec($sql);
+
+                    }else{
+                        //抵扣代金券的钱,更新代金券里面的数据
+                        $sql="update codes set money=money-'{$data['money']}' where code_id='{$data['code_id']}'";
+                        $this->db->pdo->exec($sql);
+                        //在histories表里添加消费记录
+                        $sql="insert into histories set 
+user_id='{$data['user_id']}',
+member_id='{$data['member_id']}',
+amount='{$data['money']}',
+handsel_money='{$data['money']}',
+money='{$user['money']}',
+`type`=0,
+`time`='{$time}'
+";
+                        $this->db->pdo->exec($sql);
+                    }
+
+
+                }
+                //不使用代金券消费
+                else{
+                    //打完折和使用消费券后的消费金额
+                    $consume_money=$data['money']*$discount;
+                    //优惠金额
+                    $handsel_money=$data['money']-$code_money;
+                    //积分
+                    $integral=$data['money'];
+                    //余额
+                    $balance=$user['money']-$consume_money;
+                    $sql="update users set moneny=money-$consume_money,integral=integral+'{$integral}' where user_id='{$data['$user_id']}'";
+                    $this->db->pdo->exec($sql);
+                    $sql="insert into histories set 
+user_id='{$data['user_id']}',
+member_id='{$data['member_id']}',
+amount='{$data['money']}',
+handsel_money='{$handsel_money}',
+money='{$balance}',
+`type`=0,
+`time`='{$time}'
+";
+                    $this->db->pdo->exec($sql);
+                }
+                $this->db->pdo->commit();
+            }catch (ErrorException $e){
+                $this->db->pdo->rollBack();
+                $this->error=$e->getMessage();
+                return false;
+            }
+
+
+
         }
 
 
 
+    }
+    //消费记录
+    public function getConsumeRecord($page,$id){
+
+        //分页部分
+        $limit='';
+        $sql="select count(*) from histories where user_id='{$id}' and `type`=0";
+
+        //每页显示6条记录
+        $pageSize=8;
+        //总记录数
+        $count=$this->db->fetchColumn($sql);
+
+        //总页数
+        $totalPage=ceil($count/$pageSize);
+        //优化
+        $page=$page>$totalPage?$totalPage:$page;
+        $page=$page<1?1:$page;
+        //数据库limit的开始位置
+        $start_page=($page-1)*$pageSize;
+        $limit.=" limit $start_page,$pageSize";
+        $sql="select * from histories where user_id='{$id}' and `type`=0 order by history_id DESC".$limit;
+
+        $records=$this->db->fetchAll($sql);
+
+        foreach ($records as &$record){
+            $sql="select realname from users where user_id='{$record['user_id']}'";
+            $record['user_realname']=$this->db->fetchColumn($sql);
+            $sql="select realname from members where member_id='{$record['member_id']}'";
+            $record['member_realname']=$this->db->fetchColumn($sql);
+
+        }
+        return ['records'=>$records,'pageSize'=>$pageSize,'count'=>$count,'totalPage'=>$totalPage,'page'=>$page];;
     }
     //修改保存
     public function editSave($data){

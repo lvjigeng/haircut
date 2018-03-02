@@ -9,15 +9,14 @@
 class CodesModel extends Model
 {
     public function getAll($search,$page){
-        $where='';
+        $where=' where status=0';
         if (!empty($search)){
-            $where=" where $search and status=0";
+            $where=$where." and $search";
         }
         //分页部分
         $limit='';
         $sql="select count(*) from codes".$where;
-//        echo '<pre>';
-//        var_dump($sql);exit;
+
 
         //每页显示6条记录
         $pageSize=6;
@@ -80,7 +79,7 @@ class CodesModel extends Model
     //根据id获取用户的代金券
     public function getUserCodes($id){
         //SQL语句
-        $sql = "select * from codes where user_id='{$id}'";
+        $sql = "select * from codes where user_id='{$id}' and status=0";
         //执行
         return $this->db->fetchAll($sql);
     }

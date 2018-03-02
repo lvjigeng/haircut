@@ -93,6 +93,10 @@ class UsersController extends PlatformController
             //操作数据
             $userModel=new UsersModel();
             $rs=$userModel->getConsume($data);
+            if ($rs===false){
+                self::redirect("index?p=Admin&c=Users&a=consume&id={$data['user_id']}",'消费失败!!!'.$userModel->getError(),2);
+            }
+            self::redirect("index.php?p=Admin&c=Users&a=index",'消费成功!!!',2);
         }
         else{
             $user_id=$_GET['id'];
@@ -108,6 +112,32 @@ class UsersController extends PlatformController
             $this->assign('codes',$codes);
             $this->display('consume');
         }
+    }
+
+    //消费记录
+    public function consumeRecord(){
+        $id=$_GET['id'];
+        //接受数据
+
+        $page=$_REQUEST['page']??1;
+        //删除请求里的分页 ,后面手动拼在url上
+        unset($_REQUEST['page']);
+        //url上的参数
+        $urlParams=http_build_query($_REQUEST);
+        //操作数据
+        $usersModel=new UsersModel();
+        $records=$usersModel->getConsumeRecord($page,$id);
+
+        //把数组里的键板为变量名值变为变量值
+        extract($records);
+        //调用分页工具
+        $createPage=new PageTool();
+        $html=$createPage->show($count, $totalPage, $pageSize, $page, $urlParams);
+        //分配数据
+        $this->assign('records',$records);
+        $this->assign('html',$html);
+        //
+        $this->display('consume_record');
     }
 
     //会员添加
