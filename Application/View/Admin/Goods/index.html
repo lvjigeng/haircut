@@ -67,7 +67,7 @@
 
         <!-- nabar right -->
         <ul class="nav navbar-nav navbar-right" style="margin-top: 10px; margin-right: 5px">
-          <a href="#" ><strong>退出登录</strong></a>
+          <a href="index.php?p=Admin&c=Login&a=logout" ><strong>退出登录</strong></a>
 
         </ul>
         <!-- / navbar right -->
@@ -370,29 +370,83 @@
       <a href class="off-screen-toggle hide" data-toggle="class:off-screen" data-target=".app-aside" ></a>
       <div class="app-content-body fade-in-up">
         <!-- COPY the content from "tpl/" -->
-        <!-----------------员工添加------------------------------------>
-        <div class="note">
-          <h4>修改部门</h4>
-          <form action="index.php?p=Admin&c=Group&a=add" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="group_id" value="<?=$group['group_id']?>" >
-            <table class="news_form">
-              <tr>
-                <td>名称：</td>
-                <td><input type="text" name="name" class="inbox" value="<?=$group['name']?>" required/></td>
-              </tr>
+        <!-----------------首页主要内容------------------------------------>
+            <!-- COPY the content from "tpl/" -->
+            <div class="hbox hbox-auto-xs hbox-auto-sm">
+              <div class="col">
+                <div style="background:url(Public/Admin/personcenter/img/timg.jpg) center center; background-size:cover">
+                </div>
+                <div class="note" style="clear: both">
+                  <div><a href="index.php?p=Admin&c=Goods&a=add"><button style="color: deepskyblue">添加商品</button></a></div>
+                  <?php foreach($goods as $good):?>
+                  <div style="width: 33.3333%;height:223px;float: left;border: solid 1px #c4d0d9;text-align: center">
+                    <span>
+                      <img src="<?=$good['img']?>" alt="">
+                    </span>
+                    <div style="margin-top: 5px">
+                        <span style="font-size: 15px"><?=$good['goods_name']?></span>
+                    </div>
+                    <div>
+                      库存: <span style="font-size: 15px"><?=$good['num']?></span>
+                    </div>
+                    <span style="float: right">
+                      <a href="index.php?p=Admin&c=Goods&a=delete&id=<?=$good['goods_id']?>"><button style="color: deepskyblue">移除商品</button></a>
+                    </span>
+                    <span style="float: right"><a href="index.php?p=Admin&c=Goods&a=edit&id=<?=$good['goods_id']?>"><button style="color: deepskyblue">修改商品</button></a>
+                    </span>
 
+                  </div>
+                  <?php endforeach;?>
+                </div>
+                <!--<div class="wrapper bg-white b-b">-->
+                <!--<ul class="nav nav-pills nav-sm">-->
+                <!--<li class="active"><a href>消费记录</a></li>-->
+                <!--<li class="active"><a href>充值记录</a></li>-->
+                <!--</ul>-->
+                <!--</div>-->
+              </div>
+              <div class="col w-lg bg-light lter b-l bg-auto">
+                <div class="wrapper">
+                  <div class="panel b-light clearfix">
+                    <div class="panel-body">
+                      <div class="clear">
+                        <p><span class="am-icon-tag"></span> 店铺公告!!!</p>
+                        <p>美丽从头开始!      专业创造美丽!             简约不简单!</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="wrapper">
+                  <div class="panel b-light clearfix">
+                    <div class="panel-body">
+                      <div class="clear">
+                        <p><span class="am-icon-tag"></span> 充值活动!!!</p>
+                        <p>充500送100，充1000送300,充5000送2000</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="wrapper">
+                  <div class="panel b-light clearfix">
+                    <div class="panel-body">
+                      <div class="clear">
+                        <p><span class="am-icon-tag"></span> 最热套餐!!!</p>
+                        <p>电磁烫染   洗剪吹   美之旋律染发   </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- PASTE above -->
 
-
-              <tr>
-                <td></td>
-                <td><input type="submit" value="提交"/></td>
-              </tr>
-            </table>
-          </form>
-        </div>
         <!-- PASTE above -->
       </div>
     </div>
+    <div style="margin-left: 752px;clear: both">
+      <?=$html?>
+    </div>
+
     <!-- /content -->
 
     <!-- aside right -->
@@ -453,13 +507,8 @@
       </div>
     </div>
     <!-- / aside right -->
-
     <!-- footer -->
-    <div class="app-footer wrapper b-t bg-light">
-      <span class="pull-right">1.0.0 <a href="#app" class="m-l-sm text-muted"><i class="fa fa-long-arrow-up"></i></a></span>
-      &copy; 2014 Copyright. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
-    </div>
-     / footer 
+
   </div>
   <!-- jQuery -->
   <script src="Public/Admin/personcenter/vendor/jquery/jquery.min.js"></script>

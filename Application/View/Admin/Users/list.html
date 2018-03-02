@@ -330,6 +330,28 @@
 
                 </ul>
               </li>
+              <!--积分商城------->
+              <li>
+                <a href="index.php?p=Admin&c=Goods&a=index" class="auto">
+                    <span class="pull-right text-muted">
+                      <i class="fa fa-fw fa-angle-right text"></i>
+                      <i class="fa fa-fw fa-angle-down text-active"></i>
+                    </span>
+                  <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
+                  <span class="font-bold" translate="aside.nav.DASHBOARD">商城管理</span>
+                </a>
+              </li>
+              <!--订单管理------->
+              <li>
+                <a href="index.php?p=Admin&c=GoodOrder&a=index" class="auto">
+                    <span class="pull-right text-muted">
+                      <i class="fa fa-fw fa-angle-right text"></i>
+                      <i class="fa fa-fw fa-angle-down text-active"></i>
+                    </span>
+                  <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
+                  <span class="font-bold" translate="aside.nav.DASHBOARD">订单管理</span>
+                </a>
+              </li>
             </ul>
           </nav>
           <!-- nav -->
@@ -373,7 +395,7 @@
 
              <td><img src="<?=$user['photo']?>" alt=""></td>
              <td><?=$user['realname']?></td>
-             <td><?=$user['sex']?></td>
+             <td><?=$user['sex']==0?'女':'男'?></td>
              <td><?=$user['telephone']?></td>
              <td><?=$user['money']?></td>
              <?php if($user['vip_rank']==0):?>

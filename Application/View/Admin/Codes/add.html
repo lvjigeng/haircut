@@ -330,6 +330,28 @@
 
                 </ul>
               </li>
+              <!--积分商城------->
+              <li>
+                <a href="index.php?p=Admin&c=Goods&a=index" class="auto">
+                    <span class="pull-right text-muted">
+                      <i class="fa fa-fw fa-angle-right text"></i>
+                      <i class="fa fa-fw fa-angle-down text-active"></i>
+                    </span>
+                  <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
+                  <span class="font-bold" translate="aside.nav.DASHBOARD">商城管理</span>
+                </a>
+              </li>
+              <!--订单管理------->
+              <li>
+                <a href="index.php?p=Admin&c=GoodOrder&a=index" class="auto">
+                    <span class="pull-right text-muted">
+                      <i class="fa fa-fw fa-angle-right text"></i>
+                      <i class="fa fa-fw fa-angle-down text-active"></i>
+                    </span>
+                  <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
+                  <span class="font-bold" translate="aside.nav.DASHBOARD">订单管理</span>
+                </a>
+              </li>
             </ul>
           </nav>
           <!-- nav -->
@@ -362,7 +384,7 @@
                 <td>
                   <select name="user_id">
                     <?php foreach($users as $user):?>
-                    <option value="<?=$user['user_id']?>"><?=$user['realname']?></option>
+                    <option value="<?=$user['user_id']?>"><?=$user['username']?></option>
                     <?php endforeach;?>
                   </select>
                 </td>

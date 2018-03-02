@@ -94,13 +94,13 @@ class UsersController extends PlatformController
                 $upload = new UploadTool();
                 $photo_url = $upload->up("user_photo",$photo); //返回图片路径
                 if ($photo_url ===false){  //失败
-                    self::redirect("index.php?p=Home&c=Users&a=edit".$data['user_id'],"制作头像失败".$upload->getError(),2);
+                    self::redirect("index.php?p=Home&c=Users&a=edit","制作头像失败".$upload->getError(),2);
                 }
                 //成功 制作缩略图
                 $imageTool = new ImageTool();
                 $thumb_logo = $imageTool->thumbImage($photo_url,50,50);
                 if ($thumb_logo ===false ){  //失败
-                    self::redirect("index.php?p=Home&c=Users&a=edit".$data['user_id'],"制作头像缩略图失败".$imageTool->getError(),2);
+                    self::redirect("index.php?p=Home&c=Users&a=edit","制作头像缩略图失败".$imageTool->getError(),2);
                 }
                 //先删除原头像文件
                 @unlink($data['photo']);
@@ -113,7 +113,7 @@ class UsersController extends PlatformController
             $usersModel = new UsersModel();
             $res = $usersModel->editSave($data);
             if ($res ===false){
-                self::redirect("index.php?p=Home&c=Users&a=edit".$data['user_id'],"修改个人资料失败".$usersModel->getError(),2);
+                self::redirect("index.php?p=Home&c=Users&a=edit","修改个人资料失败".$usersModel->getError(),2);
             }
             //成功,跳到登录界面
             self::redirect("index.php?p=Home&c=Login&a=logout");

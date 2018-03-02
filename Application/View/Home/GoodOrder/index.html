@@ -268,26 +268,56 @@
               </div>
             </div>
           </div>
-          <div class="note" style="clear: both">
-          <h4>您当前积分为:<?=$_SESSION['userinfo']['integral']?></h4>
-            <?php foreach($goods as $good):?>
-            <div style="width: 33.3333%;height:223px;float: left;border: solid 1px #c4d0d9;text-align: center">
-              <span>
-                <img src="<?=$good['img']?>" alt="">
-              </span>
-              <div style="margin-top: 5px">
-                <?=$good['goods_name']?>
-              </div>
-              <div>兑换积分:<?=$good['goods_integral']?></div>
-              <span>
-                库存:<?=$good['num']?>
-              </span>
-              <a href="index.php?p=Home&c=Goods&a=exchange&id=<?=$good['goods_id']?>"><button style="color: deepskyblue">立即兑换</button></a>
+          <div class="note">
+            <h4>订单信息</h4>
+            <!--<form method="post" action="index.php?p=Home&c=GoodOrder&a=myself" class="search_form">-->
+              <!--&lt;!&ndash;<input type="hidden" name="act" value="index">用get搜索是做的&ndash;&gt;-->
+              <!--&lt;!&ndash;<input type="hidden" name="c" value="Goods">&ndash;&gt;-->
+              <!--<input type="text" name="keywords" placeholder="请输入要搜索的关键词" value=""/>-->
+              <!--<input type="submit" value="搜索"/>-->
+            <!--</form>-->
+            <table class="news_list">
+              <thead>
+              <tr>
+                <th>订单号</th>
+                <th>收货人</th>
+                <th>电话</th>
+                <th>地址</th>
+                <th>下单时间</th>
+                <th>订单状态</th>
+              </tr>
+              <?php foreach($orders as $order):?>
+              <tr>
+                <td><?=$order['order_num']?></td>
+                <td><?=$order['username']?></td>
+                <td><?=$order['telephone']?></td>
+                <td><?=$order['address']?></td>
+                <td><?=date('Ymd H:i',$order['time'])?></td>
+                <td>
+                  <?=$order['status']==0?'未完成':'完成'?>
+                  <?php if($order['status']==0):?>
+                  <div>
+                    <a href="index.php?p=Home&c=GoodOrder&a=update&id=<?=$order['order_id']?>">
+                      <button>确认收货</button>
+                    </a>
+                  </div>
+                  <?php else:?>
+
+                  <?php endif;?>
+                </td>
+              </tr>
+              <?php endforeach;?>
+              </thead>
+              <tbody>
+
+
+
+              </tbody>
+            </table>
+            <div style="margin-left:495px">
+              <?=$html?>
             </div>
-            <?php endforeach;?>
-        </div>
-
-
+          </div>
           <!--<div class="wrapper bg-white b-b">-->
           <!--<ul class="nav nav-pills nav-sm">-->
           <!--<li class="active"><a href>消费记录</a></li>-->
@@ -330,9 +360,6 @@
       </div>
       <!-- PASTE above -->
     </div>
-  </div>
-  <div style="margin-left: 752px;clear: both">
-    <?=$html?>
   </div>
   <!-- /content -->
 
@@ -395,11 +422,12 @@
   </div>
   <!-- / aside right -->
 
-  <!--&lt;!&ndash; footer &ndash;&gt;-->
-  <!--<div class="app-footer wrapper b-t bg-light">-->
-    <!--<span class="pull-right">1.0.0 <a href="#app" class="m-l-sm text-muted"><i class="fa fa-long-arrow-up"></i></a></span>-->
-    <!--&copy; 2014 Copyright. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>-->
-  <!--</div>-->
+  <!-- footer -->
+  <div class="app-footer wrapper b-t bg-light">
+    <span class="pull-right">1.0.0 <a href="#app" class="m-l-sm text-muted"><i class="fa fa-long-arrow-up"></i></a></span>
+    &copy; 2014 Copyright. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+  </div>
+  / footer
 </div>
 <!-- jQuery -->
 <script src="Public/Admin/personcenter/vendor/jquery/jquery.min.js"></script>

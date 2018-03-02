@@ -6,8 +6,13 @@
 class UsersModel extends Model
 {
     //获取全部数据
-    public function getAll($page=1){
+    public function getAll($search=[],$page=1){
+
         $where='';
+        if (!empty($search)){
+            $where=" where $search ";
+        }
+
 
         //分页部分
         $limit='';
