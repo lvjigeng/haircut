@@ -11,6 +11,7 @@ class UsersModel extends Model
         if (!empty($search)){
             $where=" where $search ";
         }
+
         //分页部分
         $limit='';
         $sql="select count(*) from users".$where;

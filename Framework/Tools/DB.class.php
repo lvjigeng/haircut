@@ -188,4 +188,16 @@ class DB{
         //设置字符集
         $this->setCharset();
     }
+    //开启事务
+    public function beginTransaction(){
+        $this->link->autocommit(FALSE);
+    }
+//提交事务
+    public function commit(){
+        $this->link->commit();
+    }
+//回滚事务
+    public function rollback(){
+        $this->link->rollback();
+    }
 }

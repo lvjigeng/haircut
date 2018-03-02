@@ -50,6 +50,7 @@ class CodesController extends PlatformController
         else{
             $usersModel=new UsersModel();
             $users=$usersModel->getAll();
+            extract($users);
             $this->assign('users',$users);
             $this->display('add');
         }
@@ -72,6 +73,7 @@ class CodesController extends PlatformController
             //查询会员表,回显要用到真实姓名
             $usersModel=new UsersModel();
             $users=$usersModel->getAll();
+            extract($users);
             $this->assign('users',$users);
             $this->assign('code',$code);
             $this->display('edit');
