@@ -24,7 +24,7 @@ class RechargeController extends PlatformController
             $rechargeModel=new RechargeModel();
             $rs=$rechargeModel->getAdd($data);
             if ($rs===false){
-                self::redirect('index.php?p=Admin&c=Recharge&a=add','添加失败!!',2);
+                self::redirect('index.php?p=Admin&c=Recharge&a=add','添加失败!!'.$rechargeModel->getError(),2);
             }
             self::redirect('index.php?p=Admin&c=Recharge&a=index');
         }
@@ -56,14 +56,12 @@ class RechargeController extends PlatformController
     public function delete(){
         $id=$_GET['id'];
 
-        $RechargeModel=new RechargeModel();
-        $rs=$RechargeModel->getDelete($id);
+        $rechargeModel=new RechargeModel();
+        $rs=$rechargeModel->getDelete($id);
         if ($rs===false){
-            self::redirect("index.php?p=Admin&c=Recharge&a=index",'删除失败!!'.$RechargeModel->getError(),2);
+            self::redirect("index.php?p=Admin&c=Recharge&a=index",'删除失败!!'.$rechargeModel->getError(),2);
         }
-        elseif($rs===3){
-            self::redirect("index.php?p=Admin&c=Recharge&a=index",'删除失败!部门下面有人不能删除',2);
-        }
+
         self::redirect("index.php?p=Admin&c=Recharge&a=index");
 
     }

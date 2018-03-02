@@ -8,6 +8,7 @@
  */
 class MembersModel extends Model
 {
+        //带搜索分页的员工列表
         public function getAll($search,$page){
             $where='';
             if (!empty($search)){
@@ -37,6 +38,13 @@ class MembersModel extends Model
                 $member['group']=$this->db->fetchRow($sql);
             }
             return ['members'=>$members,'pageSize'=>$pageSize,'count'=>$count,'totalPage'=>$totalPage,'page'=>$page];
+        }
+
+        //不带搜索分页的所有员工信息
+        public function getList(){
+            $sql="select * from members";
+            $members=$this->db->fetchAll($sql);
+            return $members;
         }
 
         public function getRow($id){

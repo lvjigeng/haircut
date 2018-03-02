@@ -162,6 +162,18 @@ class DB{
 //            return empty($row)?null:array_values($row)[0];
         return array_shift($row);
     }
+    //开启事务
+    public function beginTransaction(){
+        $this->link->autocommit(FALSE);
+    }
+//提交事务
+    public function commit(){
+        $this->link->commit();
+    }
+//回滚事务
+    public function rollback(){
+        $this->link->rollback();
+    }
     /**
      * 析构方法,清理对象占用的资源
      */

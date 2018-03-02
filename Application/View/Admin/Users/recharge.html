@@ -67,7 +67,7 @@
 
         <!-- nabar right -->
         <ul class="nav navbar-nav navbar-right" style="margin-top: 10px; margin-right: 5px">
-          <a href="index.php?p=Admin&c=Login&a=logout" ><strong>退出登录</strong></a>
+          <a href="#" ><strong>退出登录</strong></a>
 
         </ul>
         <!-- / navbar right -->
@@ -348,68 +348,24 @@
       <a href class="off-screen-toggle hide" data-toggle="class:off-screen" data-target=".app-aside" ></a>
       <div class="app-content-body fade-in-up">
         <!-- COPY the content from "tpl/" -->
-        <!-----------------员工列表------------------------------------>
+        <!-----------------充值------------------------------------>
         <div class="note">
-          <h4>会员列表</h4>
-          <form method="post" action="index.php?p=Admin&c=users&a=index" class="search_form">
-            <!--<input type="hidden" name="act" value="index">用get搜索是做的-->
-            <!--<input type="hidden" name="c" value="Goods">-->
-            <input type="text" name="keywords" placeholder="请输入要搜索的关键词" value=""/>
-            <input type="submit" value="搜索"/>
+          <h4>充值</h4>
+          <form action="index.php?p=Admin&c=Users&a=recharge" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="user_id" value="<?=$user_id?>">
+
+            <table class="news_form">
+              <tr>
+                <td>充值金额：</td>
+                <td><input type="text" name="money" class="inbox" required/></td>
+              </tr>
+
+              <tr>
+                <td></td>
+                <td><input type="submit" value="提交"/></td>
+              </tr>
+            </table>
           </form>
-          <table class="news_list">
-            <thead>
-            <tr>
-              <th>头像</th>
-              <th>姓名</th>
-              <th>性别</th>
-              <th>电话</th>
-              <th>余额</th>
-              <th>vip等级</th>
-              <th>操作</th>
-            </tr>
-            <?php foreach($users as $user):?>
-           <tr>
-
-             <td><img src="<?=$user['photo']?>" alt=""></td>
-             <td><?=$user['realname']?></td>
-             <td><?=$user['sex']?></td>
-             <td><?=$user['telephone']?></td>
-             <td><?=$user['money']?></td>
-             <?php if($user['vip_rank']==0):?>
-             <td>普通会员</td>
-             <?php elseif($user['vip_rank']==1):?>
-             <td>青铜会员</td>
-             <?php elseif($user['vip_rank']==2):?>
-             <td>白银会员</td>
-             <?php elseif($user['vip_rank']==3):?>
-             <td>黄金会员</td>
-             <?php elseif($user['vip_rank']==4):?>
-             <td>铂金会员</td>
-             <?php elseif($user['vip_rank']==5):?>
-             <td>砖石会员</td>
-             <?php endif;?>
-
-              <td style="text-align: left;width: 270px">
-                <a href="index.php?p=Admin&c=Users&a=recharge&id=<?=$user['user_id']?>"><button class="button1">充值</button></a>
-                <a href="index.php?p=Admin&c=Users&a=rechargeRecord&id=<?=$user['user_id']?>"><button class="button2">充值记录</button></a>
-                <a href="index.php?p=Admin&c=Users&a=consume&id=<?=$user['user_id']?>"><button class="button1">消费</button></a>
-                <a href="index.php?p=Admin&c=Users&a=edit&id=<?=$user['user_id']?>"><button class="button2">消费记录</button></a>
-
-              </td>
-             <!--<td><a href="index.php?p=Admin&c=Users&a=edit&id=<?=$user['user_id']?>">编辑</a>&emsp;<a href="index.php?p=Admin&c=Users&a=delete&id=<?=$user['user_id']?>">删除</a></td>-->
-           </tr>
-            <?php endforeach;?>
-            </thead>
-            <tbody>
-
-
-
-            </tbody>
-          </table>
-          <div style="margin-left: 695px">
-          <?=$html?>
-          </div>
         </div>
         <!-- PASTE above -->
       </div>

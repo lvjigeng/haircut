@@ -15,7 +15,7 @@ abstract class Model
     public function __construct()
     {
         $config = require "./Application/Config/application.config.php";
-        $this->db = PDODB::getInstance($config['db']['dsn'],$config['db']['username'],$config['db']['password']);
+        $this->db = PDODB::getInstance();
     }
 
     /**

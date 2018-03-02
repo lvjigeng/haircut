@@ -6,11 +6,9 @@
 class UsersModel extends Model
 {
     //获取全部数据
-    public function getAll($search=[],$page=1){
+    public function getAll($page=1){
         $where='';
-        if (!empty($search)){
-            $where=" where $search ";
-        }
+
         //分页部分
         $limit='';
         $sql="select count(*) from users".$where;
@@ -86,6 +84,155 @@ photo='{$data['photo']}'
 ";
         //执行
         return $this->db->execute($sql);
+    }
+    //充值
+    public function getRecharge($data){
+        @session_start();
+        if (empty($data['money'])){
+            $this->error='请添写充值金额';
+            return false;
+        }
+        if ($data['money']<=0){
+            $this->error='充值金额必须大于0';
+            return false;
+        }
+        //查询赠送的金额
+        $sql="select handsel_money from `recharge` where recharge_money<='{$data['money']}' ORDER BY recharge_money DESC limit 1";
+        //赠送的金额
+        $handsel_money=$this->db->fetchColumn($sql);
+        if (empty($handsel_money)){
+            $handsel_money=0;
+        }
+
+        //总金额
+        $total_money=$data['money']+$handsel_money;
+        //查询会员等级
+        $sql="select vip_rank from `vip` where money<='{$data['money']}' ORDER BY `money` DESC limit 1";
+        //单次充值的vip等级
+        $vip_rank=$this->db->fetchColumn($sql);
+        //把数据更新到会员表里面
+        //判断原来的会员等级是否大于现在单次充值的vip等级
+
+        $sql="select * from `users` where user_id='{$data['user_id']}'";
+        $user=$this->db->fetchRow($sql);
+        //原来的vip等级
+        $old_vip_rank=$user['vip_rank'];
+        //充值后的余额
+        $balance=$user['money']+$total_money;
+        $member_id=$_SESSION['membersinfo']['member_id'];
+        $time=time();
+
+        //单次充值的vip等级小于原来的等级,不需要改变vip等级,只需要更新充值的钱
+        if ($vip_rank<$old_vip_rank){
+
+            try {
+                $this->db->pdo->beginTransaction();
+                $sql = "update users set `money`='{$total_money}'+`money` where user_id='{$data['user_id']}'";
+                 $this->db->pdo->exec($sql);
+
+                //heistory表,充值记录
+                $sql="insert into histories set
+`user_id`='{$data['user_id']}',
+`member_id`='{$member_id}',
+`type`=1,
+`amount`='{$data['money']}',
+`handsel_money`='{$handsel_money}',
+`money`='{$balance}',
+`time`='{$time}'
+";
+                 $this->db->pdo->exec($sql);
+                $this->db->pdo->commit();
+            }
+            catch (PDOException $e){
+                $this->db->pdo->rollBack();
+                $this->error=$e->getMessage();
+                return false;
+            }
+
+        }else{
+            //单次充值的vip等级大于原来的等级,需要改变vip等级和更新充值的钱
+            try{
+                $this->db->pdo->beginTransaction();
+                $sql="update users set `money`='{$total_money}'+money,vip_rank='{$vip_rank}' where user_id='{$data['user_id']}'";
+                $this->db->execute($sql);
+                //heistory表,充值记录
+                $sql="insert into histories set
+`user_id`='{$data['user_id']}',
+`member_id`='{$member_id}',
+`type`=1,
+`amount`='{$data['money']}',
+`handsel_money`='{$handsel_money}',
+`money`='{$balance}',
+`time`='{$time}'
+";
+                $this->db->pdo->exec($sql);
+                $this->db->pdo->commit();
+
+            }catch (PDOException $e){
+                $this->db->pdo->rollBack();
+                $this->error=$e->getMessage();
+                return false;
+            }
+        }
+
+    }
+    //充值记录
+    public function getRechargeRecord($page,$id){
+        $where='';
+        if (!empty($search)){
+            $where=" where $search ";
+        }
+        //分页部分
+        $limit='';
+        $sql="select count(*) from users".$where;
+
+        //每页显示6条记录
+        $pageSize=8;
+        //总记录数
+        $count=$this->db->fetchColumn($sql);
+        //总页数
+        $totalPage=ceil($count/$pageSize);
+        //优化
+        $page=$page>$totalPage?$totalPage:$page;
+        $page=$page<1?1:$page;
+        //数据库limit的开始位置
+        $start_page=($page-1)*$pageSize;
+        $limit.=" limit $start_page,$pageSize";
+        $sql="select * from histories where user_id='{$id}'".$where.$limit;
+        $records=$this->db->fetchAll($sql);
+
+        foreach ($records as &$record){
+            $sql="select realname from users where user_id='{$record['user_id']}'";
+            $record['user_realname']=$this->db->fetchColumn($sql);
+            $sql="select realname from members where member_id='{$record['member_id']}'";
+            $record['member_realname']=$this->db->fetchColumn($sql);
+
+        }
+        return ['records'=>$records,'pageSize'=>$pageSize,'count'=>$count,'totalPage'=>$totalPage,'page'=>$page];;
+    }
+    //消费
+    public function getConsume($data){
+
+
+        //查询用户余额是否足够
+        $sql="select * from users where user_id='{$data['user_id']}'";
+        //余额
+        $user=$this->db->fetchRow($sql);
+        if ($data['money']>$user['money']){
+            $this->error='余额不足!!';
+        }
+
+        //查询消费折扣
+        $sql="select discount from vip where vip_rank='{$user['vip_rank']}'";
+        $discount=$this->db->fetchColumn($sql);
+
+        //查询代金券金额
+        $sql="select money from codes where code_id='{$data['code_id']}'";
+        $code_money=$this->db->fetchColumn($sql);
+        if (empty($code_money)){
+            $code_money=0;
+        }
+        
     }
     //修改保存
     public function editSave($data){

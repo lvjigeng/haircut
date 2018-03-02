@@ -6,7 +6,7 @@
 class PDODB
 {
     //保存创建好的pdo对象
-    protected $pdo;
+    public $pdo;
     //私有的静态成员属性
     private static $instance;
     /**
@@ -16,6 +16,8 @@ class PDODB
     {
         $config = require "./Application/Config/application.config.php";
         $this->pdo = new PDO($config['db']['dsn'],$config['db']['username'],$config['db']['password']);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
     }
     private function __clone()
     {
