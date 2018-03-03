@@ -5,12 +5,19 @@
 .note h4{background:linear-gradient(0deg, #e8e9eb,#dcdddf);height:32px;font:16px/32px 微软雅黑;padding-left:12px;border-bottom:1px solid #d6d6d8;}
 .note_list{font:14px/20px arial;padding:20px 20px 20px 36px;margin:0;}
 .note_list>li{padding:5px 0;}
+.note_list1{font:14px/20px arial;padding:20px 20px 20px 36px;margin:0;}
+.note_list1>li{padding:5px 0;}
 
 
 .news_list{margin:20px auto;width:96%;border-collapse:collapse;text-align: center}
 .news_list td,.news_list th{border:1px solid #ccc;padding:4px 6px;}
 .news_list th{font:bold 17px/24px 微软雅黑;background:#daf1f9;text-align: center;height: 80px}
 .news_list td{font:17px/22px arial;height: 80px}
+
+.news_list1{margin:20px auto;width:96%;border-collapse:collapse;text-align: center}
+.news_list1 td,.news_list th{border:1px solid #ccc;padding:4px 6px;width: 500px}
+.news_list1 th{font:bold 14px/24px 微软雅黑;background:#daf1f9;text-align: center;height: 40px;width: 500px}
+.news_list1 td{font:14px/22px arial;height: 30px}
 
 .news_form{width:90%;margin:20px auto;border-collapse:collapse;}
 .news_form td{border:1px solid #ccc;padding:6px 8px;font:17px/24px arial;height: 60px}

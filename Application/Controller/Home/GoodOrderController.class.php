@@ -8,7 +8,7 @@ class GoodOrderController extends PlatformController
     //添加订单   扣除相应兑换积分
     public function add(){
 //        var_dump($_POST);
-//        var_dump($_SESSION['userinfo']);
+//        var_dump($_SESSION['userinfo']);die;
         //接收数据
         $data = $_POST;
 //        var_dump($data);die;

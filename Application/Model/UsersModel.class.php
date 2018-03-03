@@ -257,6 +257,10 @@ money=money-$consume_money,
 integral=integral+'{$integral}' where user_id='{$data['user_id']}'
 ";
                 $this->db->pdo->exec($sql);
+                //员工表里服务记录加一次
+                $sql="update members set 
+is_server=is_server+1 where member_id='{$data['member_id']}'";
+                $this->db->pdo->exec($sql);
                 //在histories表里添加消费记录
                 $sql="insert into histories set 
 user_id='{$data['user_id']}',
@@ -295,6 +299,10 @@ money=$balance,
                         var_dump(11);exit;
                         $sql="update codes set money=0, `type`=1 where code_id='{$data['code_id']}'";
                         $this->db->pdo->exec($sql);
+                        //员工表里服务记录加一次
+                        $sql="update members set 
+is_server=is_server+1 where member_id='{$data['member_id']}'";
+                        $this->db->pdo->exec($sql);
                         //在histories表里添加消费记录
                         $sql="insert into histories set 
 user_id='{$data['user_id']}',
@@ -310,6 +318,10 @@ money='{$user['money']}',
                     }else{
                         //抵扣代金券的钱,更新代金券里面的数据
                         $sql="update codes set money=money-'{$data['money']}' where code_id='{$data['code_id']}'";
+                        $this->db->pdo->exec($sql);
+                        //员工表里服务记录加一次
+                        $sql="update members set 
+is_server=is_server+1 where member_id='{$data['member_id']}'";
                         $this->db->pdo->exec($sql);
                         //在histories表里添加消费记录
                         $sql="insert into histories set 
@@ -337,6 +349,10 @@ money='{$user['money']}',
                     //余额
                     $balance=$user['money']-$consume_money;
                     $sql="update users set moneny=money-$consume_money,integral=integral+'{$integral}' where user_id='{$data['$user_id']}'";
+                    $this->db->pdo->exec($sql);
+                    //员工表里服务记录加一次
+                    $sql="update members set 
+is_server=is_server+1 where member_id='{$data['member_id']}'";
                     $this->db->pdo->exec($sql);
                     $sql="insert into histories set 
 user_id='{$data['user_id']}',

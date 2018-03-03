@@ -386,7 +386,97 @@
       <div class="app-content-body fade-in-up">
         <!-- COPY the content from "tpl/" -->
         <!-----------------首页主要内容------------------------------------>
+            <!-------------消费榜排名前三---------------------------->
+        <div class="note">
+          <h4>消费排行榜前三</h4>
 
+          <table class="news_list1">
+            <thead>
+            <tr>
+              <th>姓名</th>
+
+              <th>累计消费</th>
+            </tr>
+            <?php foreach($user_consume as $consume):?>
+            <tr>
+
+              <td><?=$consume['realname']?></td>
+              <td><?=$consume['total_consume']?></td>
+
+            </tr>
+            <?php endforeach;?>
+            </thead>
+            <tbody>
+
+
+
+            </tbody>
+          </table>
+          <!--<div style="margin-left: 695px">-->
+          <!--<?=$html?>-->
+          <!--</div>-->
+        </div>
+            <!-------------充值榜排名前三---------------------------->
+        <div class="note">
+          <h4>充值排行榜前三</h4>
+
+          <table class="news_list1">
+            <thead>
+            <tr>
+              <th>姓名</th>
+
+              <th>累计充值</th>
+            </tr>
+            <?php foreach($user_recharge as $recharge):?>
+            <tr>
+
+              <td><?=$recharge['realname']?></td>
+              <td><?=$recharge['total_recharge']?></td>
+
+            </tr>
+            <?php endforeach;?>
+            </thead>
+            <tbody>
+
+
+
+            </tbody>
+          </table>
+          <!--<div style="margin-left: 695px">-->
+          <!--<?=$html?>-->
+          <!--</div>-->
+        </div>
+
+            <!-------------服务榜排名前三---------------------------->
+        <div class="note">
+          <h4>服务排行榜前三</h4>
+
+          <table class="news_list1">
+            <thead>
+            <tr>
+              <th>姓名</th>
+
+              <th>累计服务</th>
+            </tr>
+            <?php foreach($member_server as $server):?>
+            <tr>
+
+              <td><?=$server['realname']?></td>
+              <td><?=$server['is_server']?></td>
+
+            </tr>
+            <?php endforeach;?>
+            </thead>
+            <tbody>
+
+
+
+            </tbody>
+          </table>
+          <!--<div style="margin-left: 695px">-->
+          <!--<?=$html?>-->
+          <!--</div>-->
+        </div>
         <!-- PASTE above -->
       </div>
     </div>

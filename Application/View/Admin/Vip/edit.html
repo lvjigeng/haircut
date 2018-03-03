@@ -388,16 +388,23 @@
         <!-- COPY the content from "tpl/" -->
         <!-----------------员工添加------------------------------------>
         <div class="note">
-          <h4>修改部门</h4>
-          <form action="index.php?p=Admin&c=Group&a=edit" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="group_id" value="<?=$group['group_id']?>" >
+          <h4>修改折扣</h4>
+          <form action="index.php?p=Admin&c=Vip&a=edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="vip_id" value="<?=$vip['vip_id']?>" >
             <table class="news_form">
               <tr>
-                <td>名称：</td>
-                <td><input type="text" name="name" class="inbox" value="<?=$group['name']?>" required/></td>
+                <td>会员等级：</td>
+                <td><input type="text" name="vip_rank" class="inbox" value="<?=$vip['vip_rank']?>" required/></td>
+              </tr>
+              <tr>
+                <td>会员折扣：</td>
+                <td><input type="text" name="discount" class="inbox" value="<?=$vip['discount']?>" required/></td>
               </tr>
 
-
+              <tr>
+                <td>单次充值：</td>
+                <td><input type="text" name="money" class="inbox" value="<?=$vip['money']?>" required/></td>
+              </tr>
 
               <tr>
                 <td></td>

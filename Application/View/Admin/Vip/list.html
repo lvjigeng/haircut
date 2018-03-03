@@ -338,7 +338,6 @@
                 </a>
                 <ul class="nav nav-sub dk">
                   <li ui-sref-active="active">
-                  <li ui-sref-active="active">
                     <a href="index.php?p=Admin&c=Order&a=index">
                       <span>预约列表</span>
                     </a>
@@ -386,25 +385,50 @@
       <a href class="off-screen-toggle hide" data-toggle="class:off-screen" data-target=".app-aside" ></a>
       <div class="app-content-body fade-in-up">
         <!-- COPY the content from "tpl/" -->
-        <!-----------------员工添加------------------------------------>
+        <!-----------------员工列表------------------------------------>
         <div class="note">
-          <h4>修改部门</h4>
-          <form action="index.php?p=Admin&c=Group&a=edit" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="group_id" value="<?=$group['group_id']?>" >
-            <table class="news_form">
-              <tr>
-                <td>名称：</td>
-                <td><input type="text" name="name" class="inbox" value="<?=$group['name']?>" required/></td>
-              </tr>
+          <h4>会员折扣列表</h4>
+
+          <table class="news_list">
+            <thead>
+            <tr>
+              <th>会员等级</th>
+              <th>会员折扣</th>
+              <th>单次充值</th>
+              <th>操作</th>
+            </tr>
+            <?php foreach($vips as $vip):?>
+           <tr>
+
+             <?php if($vip['vip_rank']==0):?>
+             <td>普通会员</td>
+             <?php elseif($vip['vip_rank']==1):?>
+             <td>青铜会员</td>
+             <?php elseif($vip['vip_rank']==2):?>
+             <td>白银会员</td>
+             <?php elseif($vip['vip_rank']==3):?>
+             <td>黄金会员</td>
+             <?php elseif($vip['vip_rank']==4):?>
+             <td>铂金会员</td>
+             <?php elseif($vip['vip_rank']==5):?>
+             <td>砖石会员</td>
+             <?php endif;?>
+             <td><?=$vip['discount']?></td>
+             <td><?=$vip['money']?></td>
+
+             <td><a href="index.php?p=Admin&c=Vip&a=edit&id=<?=$vip['vip_id']?>">编辑</a>&emsp;<a href="index.php?p=Admin&c=Vip&a=delete&id=<?=$vip['vip_id']?>">删除</a></td>
+           </tr>
+            <?php endforeach;?>
+            </thead>
+            <tbody>
 
 
 
-              <tr>
-                <td></td>
-                <td><input type="submit" value="提交"/></td>
-              </tr>
-            </table>
-          </form>
+            </tbody>
+          </table>
+          <!--<div style="margin-left: 695px">-->
+          <!--<?=$html?>-->
+          <!--</div>-->
         </div>
         <!-- PASTE above -->
       </div>
