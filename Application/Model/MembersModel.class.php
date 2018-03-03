@@ -53,7 +53,7 @@ class MembersModel extends Model
             return $member;
 
         }
-
+        //添加员工
         public function getAdd($data){
 
             if (empty($data['username'])) {
@@ -81,10 +81,12 @@ class MembersModel extends Model
                     return false;
                 }
             }
+            //加密后的密码
+            $password=md5($data['password']);
 
             $sql="insert into members set 
 `username`='{$data['username']}',
-`password`='{$data['password']}',
+`password`='{$password}',
 `realname`='{$data['realname']}',
 `sex`='{$data['sex']}',
 `telephone`='{$data['telephone']}',
@@ -157,6 +159,11 @@ class MembersModel extends Model
         }
 
         public function getDelete($id){
+            //删除照片
+            $sql="select photo from members where member_id='{$id}'";
+            //照片路径
+            $photo_path=$this->db->fetchColumn($sql);
+            unlink($photo_path);
             $sql="delete from members where member_id='{$id}' and is_server=0";
             $rs=$this->db->execute($sql);
             return $rs;
@@ -170,9 +177,9 @@ class MembersModel extends Model
         //将传过来的密码md5加密
         $password = md5($password);
         //从数据库查询出用户名和密码等于传入的,如果查询到说明该用户存在,如果查询不到说明用户不存在
-        $users_sql = "select * from members WHERE username='{$username}' and is_admin=1";
+        $members_sql = "select * from members WHERE username='{$username}' and is_admin=1";
         //查询用户的信息
-        $members = $this->db->fetchRow($users_sql);
+        $members = $this->db->fetchRow($members_sql);
 
         //判断用户信息是否为空
         if(empty($members)){
@@ -184,6 +191,14 @@ class MembersModel extends Model
             $this->error = "密码填写错误!";
             return false;
         }
+            //>>把登录的id放到data数组中,用于修改登录最后时间,最后ip用的
+            $data['id']=$members['member_id'];
+            //>>登陆的最后时间
+            $data['last_login_time']=time();
+            //>>登录的最后ip
+            $data['last_login_ip']=ip2long($_SERVER['REMOTE_ADDR']);
+            $sql="update members set last_login_time='{$data['last_login_time']}',last_login_ip='{$data['last_login_ip']}' where member_id='{$data['id']}'";
+            $result=$this->db->execute($sql);
 //        var_dump($_SERVER['REMOTE_ADDR']);die;
         //返回用户的信息
         return $members;

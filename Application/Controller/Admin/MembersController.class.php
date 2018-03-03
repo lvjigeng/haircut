@@ -43,27 +43,33 @@ class MembersController extends PlatformController
         if ($_SERVER['REQUEST_METHOD']=='POST'){
             $data=$_POST;
             $img_info = $_FILES['photo'];
-            //创建对象
-            /***************文件上传****************************************/
-            $upload = new UploadTool();
-            //调用上传方法,并把返回的路径赋给img_path
-            $img_path = $upload->up('members_photo', $img_info);
-            //上传没有成功
-            if ($img_path === false) {
-                self::redirect('index.php?p=Admin&c=Members&a=add', '上传失败!!' . $upload->getError(), 2);
+            if($img_info['error']!=4){
+                //创建对象
+                /***************文件上传****************************************/
+                $upload = new UploadTool();
+                //调用上传方法,并把返回的路径赋给img_path
+                $img_path = $upload->up('members_photo', $img_info);
+                //上传没有成功
+                if ($img_path === false) {
+                    self::redirect('index.php?p=Admin&c=Members&a=add', '上传失败!!' . $upload->getError(), 2);
+                }
+
+                //把返回的路径保存到$data里
+
+
+                /**************制做缩略图***********************************/
+                $thumb = new ImageTool();
+                $thumb_path = $thumb->thumbImage($img_path, 100, 100);
+                if ($thumb_path === false) {
+                    self::redirect('index.php?p=Admin&c=Members&a=add', '制做缩略图失败' . $thumb->getError(), 2);
+                }
+                $data['thumb_photo'] = $thumb_path;
+                unlink($img_path);
+            }else{
+                $data['thumb_photo']='./Public/Admin/images/head.jpg';
             }
 
-            //把返回的路径保存到$data里
-
-
-            /**************制做缩略图***********************************/
-            $thumb = new ImageTool();
-            $thumb_path = $thumb->thumbImage($img_path, 100, 100);
-            if ($thumb_path === false) {
-                self::redirect('index.php?p=Admin&c=Members&a=add', '制做缩略图失败' . $thumb->getError(), 2);
-            }
-            $data['thumb_photo'] = $thumb_path;
-            unlink($img_path);
+            //操作数据
             $membersModel=new MembersModel();
             $rs=$membersModel->getAdd($data);
             if ($rs===false){
