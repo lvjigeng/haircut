@@ -32,9 +32,9 @@ class GoodsModel extends Model
     //根据id查询商品兑换消耗积分
     public function getGood($good_id){
         //SQL语句
-        $sql = "select goods_integral from goods where goods_id='{$good_id}'";
+        $sql = "select num,goods_integral from goods where goods_id='{$good_id}'";
         //执行
-        return $this->db->fetchColumn($sql);
+        return $this->db->fetchRow($sql);
     }
     //添加商品保存
     public function add($data){
@@ -110,5 +110,30 @@ img='{$data['img']}' where goods_id='{$data['goods_id']}'
         $sql = "delete from goods where goods_id='{$id}'";
         //执行
         $this->db->execute($sql);
+    }
+    //获取当前会员的积分
+    public function getIntegral($id){
+        //SQL语句
+        $sql = "select integral from users where user_id='{$id}'";
+        //执行
+       $integral =  $this->db->fetchColumn($sql);
+//       var_dump($integral);die;
+        return $integral;
+    }
+    //修改积分以及库存
+    public function editIntegralNum($good,$good_id){
+        //sql
+        //更新数据库积分
+        $sql_integral = "update users integral set 
+`integral`=integral-'{$good['goods_integral']}'
+";
+        //更新库存
+        $sql_num = "update goods num set
+num=num-1 WHERE goods_id='{$good_id}'              
+        ";
+        //执行
+        $this->db->execute($sql_integral);
+        $this->db->execute($sql_num);
+//        var_dump($good);die;
     }
 }
