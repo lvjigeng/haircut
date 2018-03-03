@@ -60,7 +60,6 @@ telephone='{$phone}',
 `time`='{$time}',
 address='{$data['address']}'
 ";
-        //执行
         return $this->db->execute($sql);
     }
     //获取当前登录会员的订单信息

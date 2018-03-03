@@ -5,12 +5,13 @@
  */
 class GoodOrderController extends PlatformController
 {
-    //添加订单
+    //添加订单   扣除相应兑换积分
     public function add(){
 //        var_dump($_POST);
 //        var_dump($_SESSION['userinfo']);
         //接收数据
         $data = $_POST;
+//        var_dump($data);die;
         //处理数据
         $goodOrderModel = new GoodOrderModel();
         $res = $goodOrderModel->add($data);

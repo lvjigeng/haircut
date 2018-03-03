@@ -28,10 +28,11 @@
 	</header>
 	<div class="form-content">
 		<form action="index.php?p=Home&c=GoodOrder&a=add" method="post">
+			<input type="hidden" name="integral" value="<?=$good?>">
 			<ul>
 				<li>
 					<div class="form-group">
-						<label class="control-label">本次兑换消耗：<?=$good?></label>
+						<label class="control-label">本次兑换消耗：<?=$good['goods_integral']?></label>
 
 					</div>
 				</li>

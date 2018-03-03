@@ -95,7 +95,21 @@
                     <strong class="font-bold text-lt"><?=$_SESSION['userinfo']['username']?></strong>
                     <b class="caret"></b>
                   </span>
-                  <span class="text-muted text-xs block"><?=$_SESSION['userinfo']['is_vip'] ==1?'高级VIP':'普通VIP'?></span>
+                  <span class="text-muted text-xs block">
+                    <?php if($_SESSION['userinfo']['vip_rank'] ==0):?>
+                    普通会员
+                    <?php elseif($_SESSION['userinfo']['vip_rank'] ==1):?>
+                    青铜会员
+                    <?php elseif($_SESSION['userinfo']['vip_rank'] ==2):?>
+                    白银会员
+                    <?php elseif($_SESSION['userinfo']['vip_rank'] ==3):?>
+                    黄金会员
+                    <?php elseif($_SESSION['userinfo']['vip_rank'] ==4):?>
+                    铂金会员
+                    <?php elseif($_SESSION['userinfo']['vip_rank'] ==5):?>
+                    砖石会员
+                    <?php endif;?>
+                    </span>
                 </span>
             </a>
             <!-- dropdown -->
@@ -257,7 +271,7 @@
             </div>
           </div>
           <div class="note" style="clear: both">
-          <h4>您当前积分为:<?=$_SESSION['userinfo']['integral']?></h4>
+          <h4>您当前积分为:<?=$integral?></h4>
             <?php foreach($goods as $good):?>
             <div style="width: 33.3333%;height:223px;float: left;border: solid 1px #c4d0d9;text-align: center">
               <span>
