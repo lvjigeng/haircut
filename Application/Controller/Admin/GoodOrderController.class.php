@@ -32,4 +32,16 @@ class GoodOrderController extends PlatformController
         //显示页面
         $this->display("index");
     }
+    //修改发货状态
+    public function update(){
+        //根据id修改发货状态
+        //接收数据
+        $id = $_GET['id'];
+        //处理数据
+        $goodOrderModel = new GoodOrderModel();
+        $goodOrderModel->update1($id);
+        //显示页面
+        //显示页面
+        self::redirect("index.php?p=Admin&c=GoodOrder&a=index");
+    }
 }

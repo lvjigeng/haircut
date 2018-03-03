@@ -169,18 +169,6 @@
                   </a>
                 </li>
                 <li ui-sref-active="active">
-                  <a href="#">
-                    <b class="label bg-info pull-right">$</b>
-                    <span>充值记录</span>
-                  </a>
-                </li>
-                <li ui-sref-active="active">
-                  <a href="#">
-                    <b class="label bg-info pull-right">$</b>
-                    <span>消费记录</span>
-                  </a>
-                </li>
-                <li ui-sref-active="active">
                   <a href="index.php?p=Home&c=Codes&a=index">
                     <b class="label bg-info pull-right">$</b>
                     <span>代金券</span>
@@ -294,15 +282,21 @@
                 <td><?=$order['address']?></td>
                 <td><?=date('Ymd H:i',$order['time'])?></td>
                 <td>
-                  <?=$order['status']==0?'未完成':'完成'?>
                   <?php if($order['status']==0):?>
                   <div>
-                    <a href="index.php?p=Home&c=GoodOrder&a=update&id=<?=$order['order_id']?>">
-                      <button>确认收货</button>
+                    未发货
                     </a>
                   </div>
-                  <?php else:?>
-
+                  <?php elseif($order['status']==-1):?>
+                  <div>
+                    <div>发货中</div>
+                    <a href="index.php?p=Home&c=GoodOrder&a=update&id=<?=$order['order_id']?>">
+                      <button>确认收货</button>
+                  </div>
+                  <?php elseif($order['status']==1):?>
+                  <div>
+                    完成
+                  </div>
                   <?php endif;?>
                 </td>
               </tr>

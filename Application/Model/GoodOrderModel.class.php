@@ -101,4 +101,13 @@ address='{$data['address']}'
         //执行
         $this->db->execute($sql);
     }
+    //根据id修改订单状态
+    public function update1($id){
+        //SQL语句
+        $sql = "update goodOrder set 
+`status`=-1 where order_id='{$id}'
+";
+        //执行
+        $this->db->execute($sql);
+    }
 }
