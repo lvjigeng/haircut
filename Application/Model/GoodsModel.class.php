@@ -125,7 +125,7 @@ img='{$data['img']}' where goods_id='{$data['goods_id']}'
         //sql
         //更新数据库积分
         $sql_integral = "update users integral set 
-`integral`=integral-'{$good['goods_integral']}'
+`integral`=integral-'{$good['goods_integral']}' where user_id='{$_SESSION['userinfo']['user_id']}'
 ";
         //更新库存
         $sql_num = "update goods num set
