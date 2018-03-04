@@ -9,8 +9,10 @@
 class IndexController extends PlatformController
 {
     public function index(){
-        //接受数据
-
+//        @session_start();
+//        //接受数据
+//echo '<pre>';
+//var_dump($_SESSION['membersinfo']['photo']);exit;
         //操作数据
         //消费榜阿三
         $historiesModel=new HistoriesModel();

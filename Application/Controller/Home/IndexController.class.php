@@ -7,6 +7,7 @@ class IndexController extends Controller
 {
     //前台页面
     public function index(){
+
         //接收数据
         $search='';
         if (!empty($_REQUEST['keywords'])){
