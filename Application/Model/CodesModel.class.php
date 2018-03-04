@@ -71,8 +71,11 @@ class CodesModel extends Model
 
     public function getDelete($id){
 
-        $sql="delete from `codes` where code_id='{$id}'";
+        $sql="delete from `codes` where code_id='{$id}' and `status`=1";
         $rs=$this->db->execute($sql);
+        if ($rs===false){
+            $this->error='未使用的代金券不能删除';
+        }
         return $rs;
     }
 

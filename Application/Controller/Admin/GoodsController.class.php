@@ -126,7 +126,10 @@ class GoodsController extends PlatformController
         $id = $_GET['id'];
         //处理数据
         $goodsModel = new GoodsModel();
-        $goodsModel->delete($id);
+        $rs=$goodsModel->delete($id);
+        if ($rs===false){
+            self::redirect('index.php?p=Admin&c=Codes&a=index','删除失败'.$goodsModel->getError(),2);
+        }
         //显示页面
         self::redirect("index.php?p=Admin&c=Goods&a=index");
     }
