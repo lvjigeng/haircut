@@ -19,7 +19,7 @@ class MembersModel extends Model
             $sql="select count(*) from members".$where;
 
             //每页显示6条记录
-            $pageSize=6;
+            $pageSize=4;
             //总记录数
             $count=$this->db->fetchColumn($sql);
             //总页数

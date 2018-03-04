@@ -184,7 +184,7 @@ photo='{$data['photo']}'
         $sql="select count(*) from histories where user_id='{$id}' and `type`=1";
 
         //每页显示6条记录
-        $pageSize=8;
+        $pageSize=4;
         //总记录数
         $count=$this->db->fetchColumn($sql);
 
@@ -382,7 +382,7 @@ money='{$balance}',
         $sql="select count(*) from histories where user_id='{$id}' and `type`=0";
 
         //每页显示6条记录
-        $pageSize=8;
+        $pageSize=4;
         //总记录数
         $count=$this->db->fetchColumn($sql);
 
@@ -482,7 +482,7 @@ photo='{$data['photo']}' where user_id='{$data['user_id']}'
         $sql="select count(*) from article".$where;
 
         //每页显示6条记录
-        $pageSize=6;
+        $pageSize=4;
         //总记录数
         $count=$this->db->fetchColumn($sql);
         //总页数

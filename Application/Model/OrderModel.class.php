@@ -47,7 +47,7 @@ content='{$data['content']}',
         $sql="select count(*) from `order`".$where;
 
         //每页显示6条记录
-        $pageSize=6;
+        $pageSize=4;
         //总记录数
         $count=$this->db->fetchColumn($sql);
 
