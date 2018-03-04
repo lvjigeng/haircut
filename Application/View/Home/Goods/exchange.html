@@ -28,7 +28,8 @@
 	</header>
 	<div class="form-content">
 		<form action="index.php?p=Home&c=GoodOrder&a=add" method="post">
-			<input type="hidden" name="integral" value="<?=$good?>">
+			<input type="hidden" name="goods_id" value="<?=$good_id?>">
+			<input type="hidden" name="integral" value="<?=$good['goods_integral']?>">
 			<ul>
 				<li>
 					<div class="form-group">

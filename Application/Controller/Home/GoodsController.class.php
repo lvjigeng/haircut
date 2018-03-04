@@ -49,9 +49,8 @@ class GoodsController extends PlatformController
         if ($good['num'] == 0){
             self::redirect("index.php?p=Home&c=Goods&a=index","库存不足,不能兑换",2);
         }
-
-        $goodsModel->editIntegralNum($good,$good_id);  //更新数据库信息
             $this->assign("good",$good);
+            $this->assign("good_id",$good_id);
         //显示页面
             $this->display("exchange");
 

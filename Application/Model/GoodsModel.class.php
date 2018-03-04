@@ -121,15 +121,15 @@ img='{$data['img']}' where goods_id='{$data['goods_id']}'
         return $integral;
     }
     //修改积分以及库存
-    public function editIntegralNum($good,$good_id){
+    public function editIntegralNum($data){
         //sql
         //更新数据库积分
         $sql_integral = "update users integral set 
-`integral`=integral-'{$good['goods_integral']}' where user_id='{$_SESSION['userinfo']['user_id']}'
+`integral`=integral-'{$data['integral']}' where user_id='{$_SESSION['userinfo']['user_id']}'
 ";
         //更新库存
         $sql_num = "update goods num set
-num=num-1 WHERE goods_id='{$good_id}'              
+num=num-1 WHERE goods_id='{$data['goods_id']}'              
         ";
         //执行
         $this->db->execute($sql_integral);

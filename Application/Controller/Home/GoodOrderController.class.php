@@ -15,6 +15,9 @@ class GoodOrderController extends PlatformController
         //处理数据
         $goodOrderModel = new GoodOrderModel();
         $res = $goodOrderModel->add($data);
+        //处理商品积分以及库存
+        $goodsModel = new GoodsModel();
+        $goodsModel->editIntegralNum($data);
         if ($res ===false){
             self::redirect("index.php?p=Home&c=Goods&a=index","兑换失败".$goodOrderModel->getError(),2);
         }

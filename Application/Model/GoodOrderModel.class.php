@@ -30,7 +30,7 @@ class GoodOrderModel extends Model
         $start_page=($page-1)*$pageSize;
         $limit.=" limit $start_page,$pageSize";
 
-        $sql="select * from goodOrder".$where.$limit;
+        $sql="select * from goodOrder".$where." order by order_id desc".$limit;
 //        echo '<pre>';
 //        var_dump($sql);exit;
         $orders = $this->db->fetchAll($sql);
@@ -84,7 +84,7 @@ address='{$data['address']}'
         $limit.=" limit $start_page,$pageSize";
 //        var_dump($_SESSION['userinfo']['username']);
         //根据session里的用户信息查询订单
-        $sql = "select * from goodOrder where username='{$_SESSION['userinfo']['realname']}'".$limit;
+        $sql = "select * from goodOrder where username='{$_SESSION['userinfo']['realname']}' order by order_id desc".$limit;
 //        var_dump($sql);die;
         //执行
         $orders =  $this->db->fetchAll($sql);
