@@ -67,7 +67,21 @@ class MembersController extends PlatformController
                 unlink($img_path);
             }
             else{
-                $data['thumb_photo']='./Public/Admin/images/head.jpg';
+
+
+
+                //把返回的路径保存到$data里
+
+                $img_path='Public/Admin/images/head.jpg';
+                /**************制做缩略图***********************************/
+                $thumb = new ImageTool();
+                $thumb_path = $thumb->thumbImage($img_path, 100, 100);
+                if ($thumb_path === false) {
+                    self::redirect('index.php?p=Admin&c=Members&a=add', '制做缩略图失败' . $thumb->getError(), 2);
+                }
+                $data['thumb_photo'] = $thumb_path;
+
+
             }
 
             //操作数据
