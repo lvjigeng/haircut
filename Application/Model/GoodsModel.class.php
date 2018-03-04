@@ -12,7 +12,7 @@ class GoodsModel extends Model
         $sql="select count(*) from goods";
 
         //每页显示6条记录
-        $pageSize=4;
+        $pageSize=6;
         //总记录数
         $count=$this->db->fetchColumn($sql);
         //总页数

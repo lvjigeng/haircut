@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="Public/Admin/personcenter/css/app.css" type="text/css" />
   <link rel="stylesheet" href="Public/Admin/personcenter/css/index.css" type="text/css" />
 </head>
-<body>
+<body style="height: 945px">
 <div class="app app-header-fixed" id="app">
   <!-- navbar -->
   <div class="app-header navbar">
@@ -302,11 +302,11 @@
                     </a>
                   </div>
                   <?php elseif($order['status']==-1):?>
-                  <div>
-                    <div>发货中</div>
-                    <a href="index.php?p=Home&c=GoodOrder&a=update&id=<?=$order['order_id']?>">
-                      <button>确认收货</button>
-                  </div>
+                    <div>
+                      <div>发货中</div>
+                      <a href="index.php?p=Home&c=GoodOrder&a=update&id=<?=$order['order_id']?>">
+                        <button>确认收货</button>
+                    </div>
                   <?php elseif($order['status']==1):?>
                   <div>
                     完成
