@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>-会员-注册-</title>
+    <meta name="keywords"  content="设置关键词..." />
+    <meta name="description" content="设置描述..." />
+    <meta name="author" content="DeathGhost" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name='apple-touch-fullscreen' content='yes'>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <link rel="icon" href="Public/Admin/login/images/icon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="Public/Admin/login/css/style.css" />
+    <script src="Public/Admin/login/js/jquery.js"></script>
+    <script src="Public/Admin/login/js/public.js"></script>
+    <script src="Public/Admin/login/js/customScrollbar.min.js"></script>
+    <script src="Public/Admin/login/js/login.js"></script>
+</head>
+<body class="login-page">
+<section class="login-contain">
+    <header>
+        <h1>注册</h1>
+        <p>registered</p>
+    </header>
+    <div class="form-content">
+        <form action="index.php?p=Home&c=Index&a=add1" method="post" enctype="multipart/form-data">
+            <ul>
+                <li>
+                    <span>
+                        <label class="control-label">用户名：</label>
+                        <input type="text"  class="form-control form-underlined"  name="username"/>
+                    </span>
+                    <span>
+                        <label class="control-label">真实姓名：</label>
+                        <input type="text"  class="form-control form-underlined" name="realname"/>
+                    </span>
+                    <span>
+                        <label class="control-label">密码：</label>
+                        <input type="password"  class="form-control form-underlined" name="password"/>
+                    </span>
+                    <span>
+                        <label class="control-label">确认密码：</label>
+                        <input type="password"  class="form-control form-underlined" name="repassword"/>
+                    </span>
+                    <span>
+                        <label class="control-label">性别：</label>
+                        <input type="radio" name="sex" value="1" checked> 男
+                        <input type="radio" name="sex" value="0"> 女
+                    </span>
+                    <div>
+                        <label class="control-label">Tel：</label>
+                        <input type="number" class="form-control form-underlined" name="telephone" placeholder="请输入11位手机号"/>
+                    </div>
+                    <div>
+                        <label class="control-label">头像：</label>
+                        <input type="file" name="photo">
+                    </div>
+                </li>
+                <li>
+                    <input class="btn btn-lg btn-block" id="entry" type="submit" value="注册"></input>
+                </li>
+                <li>
+                    <p class="btm-info">©Copyright 2006-2010 <a href="#" target="_blank" title="DeathGhost">DeathGhost.cn</a></p>
+                    <address class="btm-info">四川省成都市天府新区</address>
+                </li>
+            </ul>
+        </form>
+
+    </div>
+</section>
+<div class="mask"></div>
+<div class="dialog">
+    <div class="dialog-hd">
+        <strong class="lt-title">标题</strong>
+        <a class="rt-operate icon-remove JclosePanel" title="关闭"></a>
+    </div>
+    <div class="dialog-bd">
+        <!--start::-->
+        <p>这里是基础弹窗,可以定义文本信息，HTML信息这里是基础弹窗,可以定义文本信息，HTML信息。</p>
+        <!--end::-->
+    </div>
+    <div class="dialog-ft">
+        <button class="btn btn-info JyesBtn">确认</button>
+        <button class="btn btn-secondary JnoBtn">关闭</button>
+    </div>
+</div>
+</body>
+</html>

@@ -66,11 +66,6 @@ class UsersModel extends Model
             $this->error = "电话不能为空";
             return false;
         }
-        //头像不能为空
-        if (empty($data['photo'])){
-            $this->error = "请上传头像";
-            return false;
-        }
         //密码和确认密码一致
         if($data['password'] != $data['repassword']){
             $this->error = "密码和确认密码不一致";
