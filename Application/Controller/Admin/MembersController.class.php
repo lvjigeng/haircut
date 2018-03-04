@@ -65,7 +65,8 @@ class MembersController extends PlatformController
                 }
                 $data['thumb_photo'] = $thumb_path;
                 unlink($img_path);
-            }else{
+            }
+            else{
                 $data['thumb_photo']='./Public/Admin/images/head.jpg';
             }
 
