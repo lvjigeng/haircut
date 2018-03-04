@@ -1,0 +1,160 @@
+<div class="app-aside hidden-xs bg-dark">
+    <div class="aside-wrap">
+        <div class="navi-wrap">
+            <!-- user -->
+            <div class="clearfix hidden-xs text-center hide" id="aside-user">
+                <div class="dropdown wrapper">
+                    <a ui-sref="app.page.profile">
+                <span class="thumb-lg w-auto-folded avatar m-t-sm">
+                  <img src="<?=$_SESSION['userinfo']['photo']?>" class="img-full" alt="...">
+                </span>
+                    </a>
+                    <a href="#" data-
+                       toggle="dropdown" class="dropdown-toggle hidden-folded">
+                <span class="clear">
+                  <span class="block m-t-sm">
+                    <strong class="font-bold text-lt"><?=$_SESSION['userinfo']['username']?></strong>
+                    <b class="caret"></b>
+                  </span>
+                  <span class="text-muted text-xs block">
+                    <?php if($_SESSION['userinfo']['vip_rank'] ==0):?>
+                      普通会员
+                      <?php elseif($_SESSION['userinfo']['vip_rank'] ==1):?>
+                      青铜会员
+                      <?php elseif($_SESSION['userinfo']['vip_rank'] ==2):?>
+                      白银会员
+                      <?php elseif($_SESSION['userinfo']['vip_rank'] ==3):?>
+                      黄金会员
+                      <?php elseif($_SESSION['userinfo']['vip_rank'] ==4):?>
+                      铂金会员
+                      <?php elseif($_SESSION['userinfo']['vip_rank'] ==5):?>
+                      砖石会员
+                      <?php endif;?>
+                    </span>
+                </span>
+                    </a>
+                    <!-- dropdown -->
+                    <ul class="dropdown-menu animated fadeInRight w hidden-folded">
+                        <li class="wrapper b-b m-b-sm bg-info m-t-n-xs">
+                            <span class="arrow top hidden-folded arrow-info"></span>
+                            <div>
+                                <p>300mb of 500mb used</p>
+                            </div>
+                            <progressbar value="60" type="white" class="progress-xs m-b-none dker"></progressbar>
+                        </li>
+                        <li>
+                            <a href>Settings</a>
+                        </li>
+                        <li>
+                            <a ui-sref="app.page.profile">Profile</a>
+                        </li>
+                        <li>
+                            <a href>
+                                <span class="badge bg-danger pull-right">3</span>
+                                Notifications
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a ui-sref="access.signin">Logout</a>
+                        </li>
+                    </ul>
+                    <!-- / dropdown -->
+                </div>
+                <div class="line dk hidden-folded"></div>
+            </div>
+            <!-- / user -->
+
+            <!-- nav -->
+            <nav ui-nav class="navi">
+                <ul class="nav">
+                    <li ui-sref-active="active">
+                        <a href="index.php?p=Home&c=Index&a=index">
+                            <i class="glyphicon glyphicon-list"></i>
+                            <span class="font-bold" translate="aside.nav.CALENDAR">前台首页</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a href="index.php?p=Home&c=Users&a=index">
+                            <i class="glyphicon glyphicon-th-large icon text-success"></i>
+                            <span class="font-bold" translate="aside.nav.CALENDAR">个人首页</span>
+                        </a>
+                    </li>
+
+
+                    <!--------------用户管理-------->
+                    <li>
+                        <a href class="auto">
+                  <span class="pull-right text-muted">
+                    <i class="fa fa-fw fa-angle-right text"></i>
+                    <i class="fa fa-fw fa-angle-down text-active"></i>
+                  </span>
+                            <i class="glyphicon glyphicon-stats icon text-primary-dker"></i>
+                            <span class="font-bold" translate="aside.nav.DASHBOARD">个人中心</span>
+                        </a>
+                        <ul class="nav nav-sub dk">
+                            <li class="nav-sub-header">
+                                <a href>
+                                    <span translate="aside.nav.DASHBOARD">Dashboard</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a href="index.php?p=Home&c=Order&a=add">
+                                    <span>预约美发</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a href="index.php?p=Home&c=Codes&a=index">
+                                    <b class="label bg-info pull-right">$</b>
+                                    <span>代金券</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.php?p=Home&c=Users&a=edit">
+                                    <b class="badge bg-success pull-right">70%</b>
+                                    <span translate="aside.nav.your_stuff.PROFILE">修改个人资料</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--------------活动区-------->
+                    <li>
+                        <a href="index.php?p=Home&c=Users&a=index" class="auto">
+                  <span class="pull-right text-muted">
+                    <i class="fa fa-fw fa-angle-right text"></i>
+                    <i class="fa fa-fw fa-angle-down text-active"></i>
+                  </span>
+                            <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
+                            <span class="font-bold" translate="aside.nav.DASHBOARD">店铺活动</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.php?p=Home&c=Goods&a=index" class="auto">
+                  <span class="pull-right text-muted">
+                    <i class="fa fa-fw fa-angle-right text"></i>
+                    <i class="fa fa-fw fa-angle-down text-active"></i>
+                  </span>
+                            <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
+                            <span class="font-bold" translate="aside.nav.DASHBOARD">积分商城</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.php?p=Home&c=GoodOrder&a=myself" class="auto">
+                  <span class="pull-right text-muted">
+                    <i class="fa fa-fw fa-angle-right text"></i>
+                    <i class="fa fa-fw fa-angle-down text-active"></i>
+                  </span>
+                            <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
+                            <span class="font-bold" translate="aside.nav.DASHBOARD">订单管理</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- nav -->
+
+            <!-- aside footer -->
+
+            <!-- / aside footer -->
+        </div>
+    </div>
+</div>

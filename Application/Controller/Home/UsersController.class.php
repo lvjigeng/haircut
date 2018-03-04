@@ -105,12 +105,10 @@ class UsersController extends PlatformController
                 }
                 //成功 制作缩略图
                 $imageTool = new ImageTool();
-                $thumb_logo = $imageTool->thumbImage($photo_url,50,50);
+                $thumb_logo = $imageTool->thumbImage($photo_url,100,100);
                 if ($thumb_logo ===false ){  //失败
                     self::redirect("index.php?p=Home&c=Users&a=edit","制作头像缩略图失败".$imageTool->getError(),2);
                 }
-                //先删除原头像文件
-                @unlink($data['photo']);
                 //成功就将缩略图保存到$data里
                 $data['photo'] = $thumb_logo;
                 //删除原图片
