@@ -19,7 +19,7 @@ class UsersModel extends Model
         $sql="select count(*) from users".$where;
 
         //每页显示6条记录
-        $pageSize=5;
+        $pageSize=4;
         //总记录数
         $count=$this->db->fetchColumn($sql);
         //总页数
