@@ -22,10 +22,12 @@ class UsersController extends PlatformController
         $usersModel = new UsersModel();
         $users = $usersModel->getAll();
         $articles = $usersModel->getAllArticle($search,$page);
-        $orders = $usersModel->getOrder();
+        $orders = $usersModel->getOrder($page);
 //        var_dump($orders);die;
         //把数组里的键板为变量名值变为变量值
         extract($articles);
+        extract($orders);
+//        var_dump($orders);die;
         //调用分页工具
         $createPage=new PageTool();
         $html=$createPage->show($count, $totalPage, $pageSize, $page, $urlParams);

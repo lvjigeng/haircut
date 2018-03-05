@@ -21,6 +21,14 @@ class LoginController extends Controller
         //接收数据
         $username = $_POST['username'];
         $password = $_POST['password'];
+        $captcha = $_POST['captcha'];
+        //>>2.处理数据
+        //验证验证码是否正确
+        @session_start();
+        //不区分大小写进行比对  strtoupper()  全部大写
+        if(strtoupper($captcha) != strtoupper($_SESSION['random_code'])){
+            self::redirect("index.php?p=Home&c=Login&a=Login","验证码错误",2);
+        }
         //处理数据
         $usersModel = new UsersModel();
         $users = $usersModel->check($username,$password);

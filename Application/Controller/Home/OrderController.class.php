@@ -5,10 +5,6 @@
  */
 class OrderController extends PlatformController
 {
-    //后台列表显示
-    public function index(){
-
-    }
     //预约美发
     public function add(){
         if ($_SERVER['REQUEST_METHOD'] == "POST"){
