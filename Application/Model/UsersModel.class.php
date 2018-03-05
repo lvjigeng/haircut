@@ -501,9 +501,25 @@ photo='{$data['photo']}' where user_id='{$data['user_id']}'
         return ['articles'=>$articles,'pageSize'=>$pageSize,'count'=>$count,'totalPage'=>$totalPage,'page'=>$page];
     }
     //获取预约数据
-    public function getOrder(){
+    public function getOrder($page=1){
+        //分页部分
+        $limit='';
+        $sql="select count(*) from `order` where realname='{$_SESSION['userinfo']['realname']}'";
+
+        //每页显示6条记录
+        $pageSize=4;
+        //总记录数
+        $count=$this->db->fetchColumn($sql);
+        //总页数
+        $totalPage=ceil($count/$pageSize);
+        //优化
+        $page=$page>$totalPage?$totalPage:$page;
+        $page=$page<1?1:$page;
+        //数据库limit的开始位置
+        $start_page=($page-1)*$pageSize;
+        $limit.=" limit $start_page,$pageSize";
         //SQL语句
-        $sql = "select * from `order`";
+        $sql = "select * from `order` WHERE realname='{$_SESSION['userinfo']['realname']}'".$limit;
         //执行
         $orders =  $this->db->fetchAll($sql);
         foreach ($orders as &$val){
@@ -515,7 +531,7 @@ photo='{$data['photo']}' where user_id='{$data['user_id']}'
             $val['barber'] = $barber;
         }
 //        var_dump($orders);die;
-        return $orders;
+        return  ['orders'=>$orders,'pageSize'=>$pageSize,'count'=>$count,'totalPage'=>$totalPage,'page'=>$page];
     }
     //验证登录
     public function check($username,$password){
