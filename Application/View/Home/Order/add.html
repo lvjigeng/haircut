@@ -28,6 +28,7 @@
     </header>
     <div class="form-content">
         <form action="index.php?p=Home&c=Order&a=add" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="realname" value="<?=$_SESSION['userinfo']['realname']?>">
             <ul>
                 <li>
                     <div style="margin-bottom: 10px">
