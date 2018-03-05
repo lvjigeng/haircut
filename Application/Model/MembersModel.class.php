@@ -203,6 +203,24 @@ class MembersModel extends Model
         //返回用户的信息
         return $members;
     }
+    public function checkIdPwd($id,$password){
+        //根据用户id查询用户的数据
+        $member_sql = "select * from members WHERE member_id='{$id}'" ;
+        //查询用户的信息
+        $member=$this->db->fetchRow($member_sql);
+        //判断用户信息是否为空
+        if(empty($member)){
+            $this->error = "用户不存在!";
+            return false;
+        }
+        //判断密码是否正确
+        if(md5(md5($member['password'])) != $password){
+            $this->error = "密码填写错误!";
+            return false;
+        }
+        //返回用户的信息
+        return $member;
+    }
 
 
 }

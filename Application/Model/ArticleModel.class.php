@@ -45,6 +45,18 @@ class ArticleModel extends Model
     }
 
     public function getAdd($data){
+        if(empty($data['title'])){
+            $this->error='标题不能为空';
+            return false;
+        }
+        if(empty($data['start'])){
+            $this->error='开始时间不能为空';
+            return false;
+        }
+        if(empty($data['end'])){
+            $this->error='结束时间不能为空';
+            return false;
+        }
         $time=time();
         $sql="insert into `article` set 
 `title`='{$data['title']}',
