@@ -27,6 +27,7 @@ class OrderModel extends Model
         $data['date'] = strtotime($data['date']);
         //sql语句
         $sql = "insert into `order` set 
+realname='{$data['realname']}',
 phone='{$data['telephone']}',
 barber='{$data['barber']}',
 content='{$data['content']}',
