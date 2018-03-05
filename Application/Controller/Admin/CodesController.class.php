@@ -49,7 +49,7 @@ class CodesController extends PlatformController
         }
         else{
             $usersModel=new UsersModel();
-            $users=$usersModel->getAll();
+            $users=$usersModel->getList();
             extract($users);
             $this->assign('users',$users);
             $this->display('add');

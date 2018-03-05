@@ -5,7 +5,7 @@
  */
 class UsersModel extends Model
 {
-    //获取全部数据
+    //获取会员列表的分页的全部数据
     public function getAll($search=[],$page=1){
 
         $where='';
@@ -36,6 +36,12 @@ class UsersModel extends Model
 //        var_dump($sql);exit;
         $users=$this->db->fetchAll($sql);
         return ['users'=>$users,'pageSize'=>$pageSize,'count'=>$count,'totalPage'=>$totalPage,'page'=>$page];
+    }
+    //获取代金券所属人
+    public function getList(){
+        $sql="select username from users";
+        $users=$this->db->fetchAll($sql);
+        return $users;
     }
     //获取一条数据
     public function getOne($id){
