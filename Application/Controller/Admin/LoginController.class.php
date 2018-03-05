@@ -18,12 +18,13 @@ class LoginController extends Controller
         //接收数据
         $username = $_POST['username'];
         $password = $_POST['password'];
+        $random_code=$_POST['random_code'];
         //处理数据
 
         $membersModel = new MembersModel();
-        $members = $membersModel->check($username,$password);
+        $members = $membersModel->check($username,$password,$random_code);
         if ($members ===false){   //登录失败
-            self::redirect("index.php?p=Admin&c=Login&a=Login","登录失败".$membersModel->getError(),5);
+            self::redirect("index.php?p=Admin&c=Login&a=Login","登录失败".$membersModel->getError(),2);
         }
         //成功 将用户信息保存到session中
         @session_start();

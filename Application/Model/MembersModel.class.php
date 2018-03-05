@@ -170,7 +170,7 @@ class MembersModel extends Model
         }
 
 
-        public function check($username,$password){
+        public function check($username,$password,$random_code){
         //将传过来的用户名进行转义
         $username = addslashes($username);
 
@@ -180,7 +180,12 @@ class MembersModel extends Model
         $members_sql = "select * from members WHERE username='{$username}' and is_admin=1";
         //查询用户的信息
         $members = $this->db->fetchRow($members_sql);
-
+        //判断验证是否正确
+          @session_start();
+          if (strtoupper($random_code)!=strtoupper($_SESSION['random_code'])){
+              $this->error='验证码错误';
+              return false;
+          }
         //判断用户信息是否为空
         if(empty($members)){
             $this->error = "用户名不存在!";
