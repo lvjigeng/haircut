@@ -71,8 +71,8 @@ class GoodsController extends PlatformController
     public function edit(){
         if ($_SERVER['REQUEST_METHOD'] == "POST"){
             //修改保存
-            var_dump($_POST);
-            var_dump($_FILES);
+//            var_dump($_POST);
+//            var_dump($_FILES);
             //接收数据
             $data = $_POST;
             //判断是否更改商品图
