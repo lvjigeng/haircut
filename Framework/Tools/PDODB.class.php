@@ -68,6 +68,7 @@ class PDODB
      */
     public function execute($sql){
         $num = $this->pdo->exec($sql);
+//        var_dump($num);die;
         if($num===false){//执行sql失败
             die($this->pdo->errorInfo()[2]);
         }

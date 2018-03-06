@@ -83,9 +83,18 @@ img='{$data['img']}'
             $this->error = "兑换积分不能为空";
             return false;
         }
+        //库存不能小于与0
+        if ($data['num']<0){
+            $this->error = "库存不能为负";
+            return false;
+        }
         //库存不能为空
-        if (empty($data['num'])){
+        if (is_null($data['num'])){
             $this->error = "库存不能为空";
+            return false;
+        }
+        if ($data['num'] ==''){
+            $this->error = "请填写库存数";
             return false;
         }
         //SQL语句
@@ -95,8 +104,10 @@ goods_integral='{$data['goods_integral']}',
 num='{$data['num']}',
 img='{$data['img']}' where goods_id='{$data['goods_id']}'
 ";
+//        var_dump($sql);die;
         //执行
-        return $this->db->execute($sql);
+       return $this->db->execute($sql);
+//       var_dump($a);die;
     }
     //移除商品
     public function delete($id){
