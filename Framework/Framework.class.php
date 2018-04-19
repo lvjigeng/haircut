@@ -28,7 +28,7 @@ class Framework
         defined('ROOT_PATH') or define('ROOT_PATH',dirname($_SERVER['SCRIPT_FILENAME']).DS); //项目的根目录
         defined('APP_PATH') or define('APP_PATH',ROOT_PATH.'Application'.DS);  //Application的目录
         defined('FRAM_PATH') or define('FRAM_PATH',ROOT_PATH.'Framework'.DS);  //Framework的目录
-        defined('TOOLS_PATH') or define('TOOLS_PATH',FRAM_PATH.'tools'.DS);  //tools的目录
+        defined('TOOLS_PATH') or define('TOOLS_PATH',FRAM_PATH.'Tools'.DS);  //tools的目录
         defined('CONFIG_PATH') or define('CONFIG_PATH',APP_PATH.'Config'.DS);  //Config的目录
         defined('CONTROLLER_PATH') or define('CONTROLLER_PATH',APP_PATH.'Controller'.DS);  //Controller的目录
         defined('MODEL_PATH') or define('MODEL_PATH',APP_PATH.'Model'.DS);  //Model的目录
